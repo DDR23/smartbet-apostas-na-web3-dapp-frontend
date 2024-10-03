@@ -3,7 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import App from './App.tsx';
 import './styles/globals.css'
-
+import PageHome from './pages/home/PageHome.tsx';
+import PageBet from './pages/bet/PageBet.tsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -11,11 +12,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <>home</>
+        element: <PageHome />
       },
       {
         path: '/bet',
-        element: <>aposta</>
+        element: <PageBet />
       },
       {
         path: '*',

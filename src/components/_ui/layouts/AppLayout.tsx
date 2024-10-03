@@ -10,7 +10,7 @@ export default function AppLayout() {
   return (
     <Stack h='100vh'>
       <Header />
-      <Flex flex={1} justify={isDesktop ? 'start' : 'center'} ml={isDesktop ? '10vw' : '0'}>
+      <Flex flex={1} justify={isDesktop ? 'start' : 'center'}>
         <Outlet />
       </Flex>
       <Footer />

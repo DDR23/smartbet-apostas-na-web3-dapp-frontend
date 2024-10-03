@@ -1,11 +1,24 @@
 import { Button, Flex, Group, Image, Stack, Text } from "@mantine/core";
 import ProviderDevice from "../../utils/ProviderDevice";
+import './index.css'
 
 export default function PageHome() {
   const { isDesktop } = ProviderDevice();
 
   return (
-    <Stack justify='center'>
+    <Stack justify='center' ml={isDesktop ? '10vw' : '0'}>
+      <ul className="circles">
+        <li><Image src={'/coin_01.png'} /></li>
+        <li><Image src={'/coin_02.png'} /></li>
+        <li><Image src={'/coin_03.png'} /></li>
+        <li><Image src={'/coin_04.png'} /></li>
+        <li><Image src={'/coin_05.png'} /></li>
+        <li><Image src={'/coin_06.png'} /></li>
+        <li><Image src={'/coin_07.png'} /></li>
+        <li><Image src={'/coin_08.png'} /></li>
+        <li><Image src={'/coin_09.png'} /></li>
+        <li><Image src={'/coin_02.png'} /></li>
+      </ul>
       <Flex flex={1} gap='xl' justify={isDesktop ? 'start' : 'center'} h='max-content' direction={isDesktop ? 'row' : 'column'}>
         <Group justify="start" align="center">
           <Image src='coin.png' w={isDesktop ? '17vw' : '35vw'} />

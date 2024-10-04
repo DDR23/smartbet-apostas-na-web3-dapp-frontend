@@ -8,7 +8,7 @@ import './index.css'
 const bets = [
   {
     BET_ID: '0001',
-    BET_TITLE: 'Eleições americanas',
+    BET_TITLE: 'Eleição americana',
     BET_WALLPAPER: 'eleicao-americana.png',
     BET_OPTION_1: 'Donald Trump',
     BET_OPTION_2: 'Kamala Harris',
@@ -16,7 +16,7 @@ const bets = [
   },
   {
     BET_ID: '0002',
-    BET_TITLE: 'Eleições paulistas',
+    BET_TITLE: 'Eleição paulista',
     BET_WALLPAPER: 'eleicao-paulista.png',
     BET_OPTION_1: 'Pablo Marçal',
     BET_OPTION_2: 'Guilherme Boulos',

@@ -16,3 +16,6 @@ Projeto hospedado em:
 
 ## Screenshots
 <!-- ![App Screenshot](/public/picture_01.png) -->
+
+<!-- TODO - desenvolver pagina /about -->
+<!-- TODO - desenvolver pagina /bet/:id -->

@@ -4,9 +4,9 @@ export default function ModalConnect() {
 
   return (
     <Stack align="center" gap="xs" w='14rem'>
-      <Text>Conectar Wallet</Text>
+      <Text>Conectar Carteira</Text>
       <Button justify="center" fullWidth px='lg' leftSection={<Image src='/metamask.png' alt='metamask' width={26} height={26} />}>Metamask</Button>
-      <Button disabled justify="center" fullWidth px='lg' leftSection={<Image src='/phantom.png' alt='phantom' width={26} height={26} />}>Phantom</Button>
+      <Button disabled justify="center" fullWidth px='lg' leftSection={<Image src='/phantom.png' alt='phantom' width={26} height={26} />}>Phantom - Em breve</Button>
       <Group gap={4} c='green' mt='xs'>
         <AiOutlineSafety size={16} />
         <Text fz="xs" inline>Conexao segura</Text>

@@ -6,6 +6,7 @@ import PageBet from './pages/bet/PageBet.tsx';
 import AppLayout from './components/_ui/layouts/AppLayout.tsx';
 import PageHome from './pages/home/PageHome.tsx';
 import './styles/globals.css'
+import PageAbout from './pages/about/PageAbout.tsx';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
           {
             path: '/bets',
             element: <PageBet />
+          },
+          {
+            path: '/about',
+            element: <PageAbout />
           },
         ]
       },

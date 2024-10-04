@@ -19,3 +19,5 @@ Projeto hospedado em:
 
 <!-- TODO - desenvolver pagina /about -->
 <!-- TODO - desenvolver pagina /bet/:id -->
+<!-- TODO - header precisa estar fixo no topo -->
+<!-- TODO - ajustar responsividade de alguns textos -->

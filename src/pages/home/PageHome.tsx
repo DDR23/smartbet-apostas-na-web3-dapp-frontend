@@ -50,18 +50,18 @@ export default function PageHome() {
 
   const animationCoins = coins.map((coin) => (
     <li key={coin.COIN_ID}>
-      <Image src={coin.COIN_IMAGE} />
+      <Image src={coin.COIN_IMAGE} alt="coins" />
     </li>
   ))
 
   return (
-    <Stack justify='center' ml={isDesktop ? '10vw' : '0'}>
+    <Stack justify='center' w='100vw' gap='0' px='10vw' pt={isDesktop ? '10vh' : '0'}>
       <ul className="circles">
         {animationCoins}
       </ul>
-      <Flex flex={1} gap='xl' justify={isDesktop ? 'start' : 'center'} h='max-content' direction={isDesktop ? 'row' : 'column'}>
+      <Flex flex={1} gap='lg' justify={isDesktop ? 'start' : 'center'} h='max-content' direction={isDesktop ? 'row' : 'column'}>
         <Group justify="start" align="center">
-          <Image src='coin.png' w={isDesktop ? '17vw' : '35vw'} />
+          <Image src='coin.png' alt="logo-smartbet" w={isDesktop ? '17vw' : '35vw'} />
         </Group>
         <Stack justify="center" gap="0">
           <Group h='max-content'>

@@ -45,7 +45,7 @@ export default function CarouselBets() {
 
   const slides = bets.map((row) => (
     <Carousel.Slide key={row.BET_ID}>
-      <BackgroundImage src={row.BET_WALLPAPER} w='100vw' h='60vh'>
+      <BackgroundImage src={row.BET_WALLPAPER} w='100vw' h='57vh'>
         <Flex direction='column' maw='90vw' ta='center' mx='auto' py='2.5rem' align='center' justify='flex-end' h='100%'>
           <Paper p='lg' bg='#23232350' style={{ backdropFilter: `blur(10px)`}}>
             <Stack px='md' c='white'>
@@ -72,7 +72,7 @@ export default function CarouselBets() {
     <>
       <Carousel
         w='100vw'
-        h='60vh'
+        h='57vh'
         loop
         withControls={false}
         withIndicators

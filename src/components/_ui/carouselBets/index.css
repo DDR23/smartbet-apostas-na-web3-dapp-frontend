@@ -1,0 +1,16 @@
+.indicator {
+  width: 12px;
+  height: 4px;
+  transition: width 250ms ease;
+  display: inline-flex;
+
+  &[data-active] {
+    width: 40px;
+  }
+}
+
+.carousel-indicators {
+  justify-content: center;
+  display: flex;
+  gap: 8px;
+}

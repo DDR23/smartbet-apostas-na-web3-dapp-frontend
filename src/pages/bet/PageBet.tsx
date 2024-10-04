@@ -1,43 +1,25 @@
+import { Button, Flex, Group, Image, Text } from "@mantine/core";
+import CarouselBets from "../../components/_ui/carouselBets/CarouselBets";
+
 export default function PageBet() {
+
   return (
-    <>
-      page bet
-    </>
+    <Flex direction='column' justify='center'>
+      <CarouselBets />
+      <Flex direction='column' flex={1} justify='center' align='center' m='auto' maw='92vw'>
+        <Group mb='xs' justify="center" gap={1}>
+          <Button fz='xs' px='xs' variant="subtle">Regras</Button>
+          <Button fz='xs' px='xs' variant="subtle">Termos e Condições</Button>
+          <Button fz='xs' px='xs' variant="subtle">FAQ</Button>
+          <Button fz='xs' px='xs' variant="subtle">Contate-nos</Button>
+        </Group>
+        <Group gap='xs'>
+          <Image src='/coin.png' w={30} />
+          <Text fz='h1' ff='heading' inline>SMART BET</Text>
+        </Group>
+        <Text fz='xs' ff='monospace'>Apostas on-chain com Confiança 💵🔥</Text>
+        <Text fz='10px' ff='monospace'>© 2024–2024 Smart Bet. Todos direitos reservados</Text>
+      </Flex>
+    </Flex>
   );
 }
-
-
-
-
-
-
-
-// const [selectedTab, setSelectedTab] = useState<string>(() => {
-//   return localStorage.getItem('selectedTab') || 'configs';
-// });
-
-// useEffect(() => {
-//   localStorage.setItem('selectedTab', selectedTab);
-// }, [selectedTab]);
-
-// const handleTabChange = (value: string | null) => {
-//   if (value !== null) {
-//     setSelectedTab(value);
-//   }
-// };
-
-
-
-
-{/* <Tabs value={selectedTab} onChange={handleTabChange} style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-  <Tabs.List w='100vw' justify="center" pos='fixed' style={{ backgroundColor: 'Background', zIndex: '1' }}>
-    <Tabs.Tab p='lg' fw={700} value="home">Home</Tabs.Tab>
-    <Tabs.Tab p='lg' fw={700} value="bet">Apostas</Tabs.Tab>
-  </Tabs.List>
-  <Tabs.Panel value="home" flex={1}>
-    <>PAGINA</>
-  </Tabs.Panel>
-  <Tabs.Panel value="bet" flex={1}>
-    <>PAGINA</>
-  </Tabs.Panel>
-</Tabs> */}

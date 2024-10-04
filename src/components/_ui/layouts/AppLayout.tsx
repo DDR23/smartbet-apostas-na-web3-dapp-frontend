@@ -8,7 +8,7 @@ export default function AppLayout() {
   const { isDesktop } = ProviderDevice();
 
   return (
-    <Stack h='100vh'>
+    <Stack h='100vh' gap={0}>
       <Header />
       <Flex flex={1} justify={isDesktop ? 'start' : 'center'}>
         <Outlet />

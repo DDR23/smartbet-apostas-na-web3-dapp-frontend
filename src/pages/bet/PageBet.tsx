@@ -6,7 +6,7 @@ export default function PageBet() {
   return (
     <Flex direction='column' justify='space-between'>
       <CarouselBets />
-      <Flex direction='column' justify='center' align='center' gap='0'>
+      <Flex direction='column' justify='center' align='center' gap='0' mt='xs'>
         <Group gap='xs' justify='center'>
           <Image src='/coin.png' alt="logo-smartbet" w={30} />
           <Text fz='h1' ff='heading' inline>SMART BET</Text>

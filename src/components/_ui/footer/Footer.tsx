@@ -21,7 +21,7 @@ export default function Footer() {
 
   return (
     <Flex direction='column' align="center" justify="center" gap="xs" m='lg' mt='xs'>
-      <Flex direction='column' align='center' mx='auto' maw='92vw' ta='center' mb='xs'>
+      <Flex direction='column' align='center' mx='auto' maw='92vw' ta='center'>
         <Text ff='monospace' fz='12px' ta='center' c='dimmed' inline>Disponivel em: <HiMiniComputerDesktop size={16} /> <HiMiniDeviceTablet size={16} /> <HiMiniDevicePhoneMobile size={16} /></Text>
         <Group my='xs' justify="center" gap={1}>
           <Text component="a" href="/about" fz='xs' px='8' c='indigo'>Regras</Text>

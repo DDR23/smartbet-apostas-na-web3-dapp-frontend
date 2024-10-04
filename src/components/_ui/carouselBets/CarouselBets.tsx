@@ -47,8 +47,8 @@ export default function CarouselBets() {
     <Carousel.Slide key={row.BET_ID}>
       <BackgroundImage src={row.BET_WALLPAPER} w='100vw' h='60vh'>
         <Flex direction='column' maw='90vw' ta='center' mx='auto' py='2.5rem' align='center' justify='flex-end' h='100%'>
-          <Paper p='lg' bg='#23232390' style={{ backdropFilter: `blur(3px)`}}>
-            <Stack px='md'>
+          <Paper p='lg' bg='#23232350' style={{ backdropFilter: `blur(10px)`}}>
+            <Stack px='md' c='white'>
               <Flex direction='column'>
                 <Text fz={isDesktop ? 'h1' : 'h2'} mb='sm' inline>{row.BET_TITLE.toLocaleUpperCase()}</Text>
                 <Text fz='lg' inline>🔥</Text>

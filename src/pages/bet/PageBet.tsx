@@ -1,4 +1,4 @@
-import { Button, Flex, Group, Image, Text } from "@mantine/core";
+import { Flex, Group, Image, Text, UnstyledButton } from "@mantine/core";
 import CarouselBets from "../../components/_ui/carouselBets/CarouselBets";
 
 export default function PageBet() {
@@ -8,10 +8,10 @@ export default function PageBet() {
       <CarouselBets />
       <Flex direction='column' flex={1} justify='center' align='center' m='auto' maw='92vw'>
         <Group mb='xs' justify="center" gap={1}>
-          <Button fz='xs' px='xs' variant="subtle">Regras</Button>
-          <Button fz='xs' px='xs' variant="subtle">Termos e Condições</Button>
-          <Button fz='xs' px='xs' variant="subtle">FAQ</Button>
-          <Button fz='xs' px='xs' variant="subtle">Contate-nos</Button>
+          <UnstyledButton component="a" href="#" fz='xs' px='8' c='indigo'>Regras</UnstyledButton> {/* TODO - deve redirecionar para uma pagina de sobre /about*/}
+          <UnstyledButton fz='xs' px='8' c='dimmed' style={{cursor: 'default'}}>Termos e Condições</UnstyledButton>
+          <UnstyledButton fz='xs' px='8' c='dimmed' style={{cursor: 'default'}}>FAQ</UnstyledButton>
+          <UnstyledButton component="a" href="#" fz='xs' px='8' c='indigo'>Contate-nos</UnstyledButton> {/* TODO - adicionar meu wpp*/}
         </Group>
         <Group gap='xs'>
           <Image src='/coin.png' w={30} />

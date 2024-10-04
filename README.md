@@ -18,4 +18,5 @@ Projeto hospedado em:
 <!-- ![App Screenshot](/public/picture_01.png) -->
 
 <!-- TODO - adicionar wallpaper das apostas -->
-<!-- TODO - trocar svg da metamask por png -->
+<!-- TODO - adicionar aviso de disponivel para desktop, tablet e mobile em Footer.tsx -->
+<!-- TODO - adicionar modal com opçoes de carteiras para login em Header.tsx -->

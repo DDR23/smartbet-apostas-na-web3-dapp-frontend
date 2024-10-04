@@ -1,7 +1,10 @@
 import { Button, Group, Image, Text, UnstyledButton } from "@mantine/core";
-import iconMetamask from '../../../../public/iconmetamask.svg'
+import ProviderDevice from "../../../utils/ProviderDevice";
+import { IconWallet } from "@tabler/icons-react";
 
 export default function Header() {
+  const { isDesktop } = ProviderDevice();
+
   return (
     <Group w='100vw' px="lg" justify="space-between" bg='background' py='xs' gap={0} style={{ borderBottom: '1px solid #23232320' }}>
       <UnstyledButton component="a" href="/">
@@ -12,9 +15,9 @@ export default function Header() {
       </UnstyledButton>
       <Group>
         <Text inline>0x14...z12D</Text>
-        <Button px='xs'>
-          <Image src={iconMetamask} w={32} />
-          <Text visibleFrom="xs" pl='5'>Conectar Wallet</Text>
+        <Button px={isDesktop ? 'xs' : '8'}>
+          <IconWallet size={22} />
+          <Text visibleFrom="xs" pl='8'>Conectar Wallet</Text>
         </Button>
       </Group>
     </Group>

@@ -3,24 +3,54 @@ import ProviderDevice from "../../utils/ProviderDevice";
 import './index.css'
 
 const coins = [
-  '/coin_01.png',
-  '/coin_02.png',
-  '/coin_03.png',
-  '/coin_04.png',
-  '/coin_05.png',
-  '/coin_06.png',
-  '/coin_07.png',
-  '/coin_08.png',
-  '/coin_09.png',
-  '/coin_02.png'
+  {
+    COIN_ID: '01',
+    COIN_IMAGE: '/coin_01.png'
+  },
+  {
+    COIN_ID: '02',
+    COIN_IMAGE: '/money.png'
+  },
+  {
+    COIN_ID: '03',
+    COIN_IMAGE: '/money.png'
+  },
+  {
+    COIN_ID: '04',
+    COIN_IMAGE: '/coin_02.png'
+  },
+  {
+    COIN_ID: '05',
+    COIN_IMAGE: '/coin_03.png'
+  },
+  {
+    COIN_ID: '06',
+    COIN_IMAGE: '/coin_04.png'
+  },
+  {
+    COIN_ID: '08',
+    COIN_IMAGE: '/money.png'
+  },
+  {
+    COIN_ID: '07',
+    COIN_IMAGE: '/coin_05.png'
+  },
+  {
+    COIN_ID: '09',
+    COIN_IMAGE: '/coin_06.png'
+  },
+  {
+    COIN_ID: '10',
+    COIN_IMAGE: '/coin_07.png'
+  },
 ]
 
 export default function PageHome() {
   const { isDesktop } = ProviderDevice();
 
-  const animationCoins = coins.map((image) => (
-    <li key={image}>
-      <Image src={image} />
+  const animationCoins = coins.map((coin) => (
+    <li key={coin.COIN_ID}>
+      <Image src={coin.COIN_IMAGE} />
     </li>
   ))
 

@@ -24,10 +24,10 @@ export default function Footer() {
       <Flex direction='column' align='center' mx='auto' maw='92vw' ta='center' mb='xs'>
         <Text ff='monospace' fz='12px' ta='center' c='dimmed' inline>Disponivel em: <HiMiniComputerDesktop size={16} /> <HiMiniDeviceTablet size={16} /> <HiMiniDevicePhoneMobile size={16} /></Text>
         <Group my='xs' justify="center" gap={1}>
-          <Text component="a" href="#" fz='xs' px='8' c='indigo'>Regras</Text> {/* TODO - deve redirecionar para uma pagina de sobre /about*/}
+          <Text component="a" href="/about" fz='xs' px='8' c='indigo'>Regras</Text>
           <Text fz='xs' px='8' c='dimmed' style={{ cursor: 'default' }}>Termos e Condições</Text>
           <Text fz='xs' px='8' c='dimmed' style={{ cursor: 'default' }}>FAQ</Text>
-          <Text component="a" href="#" fz='xs' px='8' c='indigo'>Contate-nos</Text> {/* TODO - adicionar meu wpp*/}
+          <Text component="a" href="https://wa.me/5581981708405" target='_blank' fz='xs' px='8' c='indigo'>Contate-nos</Text>
         </Group>
         <Text fz='10px' ff='monospace'>© 2024–2024 Smart Bet. Todos direitos reservados</Text>
       </Flex>

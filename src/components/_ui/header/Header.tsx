@@ -22,7 +22,6 @@ export default function Header() {
         opened={opened}
         onClose={close}
         withCloseButton={false}
-        centered
         overlayProps={{
           backgroundOpacity: 0.55,
           blur: 3

@@ -1,7 +1,7 @@
 import { Flex, Group, Image, Text } from "@mantine/core";
 import CarouselBets from "../../components/_ui/carouselBets/CarouselBets";
 
-export default function PageBet() {
+export default function PageBets() {
 
   return (
     <Flex direction='column' justify='space-between'>

@@ -7,6 +7,7 @@ import PageHome from './pages/home/PageHome.tsx';
 import './styles/globals.css'
 import PageAbout from './pages/about/PageAbout.tsx';
 import PageBets from './pages/bets/PageBets.tsx';
+import PageBetId from './pages/betId/PageBetId.tsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
           {
             path: '/about',
             element: <PageAbout />
+          },
+          {
+            path: '/bet/:id',
+            element: <PageBetId />
           },
         ]
       },

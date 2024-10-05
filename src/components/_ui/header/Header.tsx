@@ -45,7 +45,7 @@ export default function Header() {
           <Text inline>0x14...z12D</Text> {/* TODO - adicionar condicional, key so deve aparecer se a carteira estiver conectada */}
           <Button px={isDesktop ? 'xs' : '8'} onClick={() => handleModalContent('connect')}>
             <HiOutlineWallet size={22} />
-            <Text visibleFrom="xs" pl='8'>Conectar carteira</Text>
+            <Text visibleFrom="xs" pl='8'>Connect wallet</Text>
           </Button>
         </Group>
       </Group>

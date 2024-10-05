@@ -11,7 +11,7 @@ export default function PageBet() {
           <Image src='/coin.png' alt="logo-smartbet" w={30} />
           <Text fz='h1' ff='heading' inline>SMART BET</Text>
         </Group>
-        <Text fz='xs' ff='monospace'>Apostas on-chain com Confiança 💵🔥</Text>
+        <Text fz='xs' ff='monospace'>On-chain Betting with Confidence 💵🔥</Text>
       </Flex>
     </Flex>
   );

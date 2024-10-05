@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { HiMiniComputerDesktop, HiMiniDevicePhoneMobile, HiMiniDeviceTablet } from "react-icons/hi2";
 
 interface User {
-  name: string;
+  login: string;
   avatar: string;
 }
 
@@ -14,7 +14,7 @@ export default function Footer() {
     fetch('https://api.github.com/users/DDR23')
       .then(res => res.json())
       .then(data => setUser({
-        name: data.name,
+        login: data.login,
         avatar: data.avatar_url,
       }));
   }, []);
@@ -32,11 +32,11 @@ export default function Footer() {
         <Text fz='10px' ff='monospace'>© 2024–2024 Smart Bet. Todos direitos reservados</Text>
       </Flex>
       {user && (
-        <Group justify="center" ta='center'>
-          <Avatar component="a" href="https://github.com/DDR23" target="_blank" src={user.avatar} alt={user.name} />
+        <Group justify="center">
+          <Avatar component="a" href="https://github.com/DDR23" target="_blank" src={user.avatar} alt={user.login} />
           <Stack gap={0} >
-            <Text ff='monospace' fz='12px'>Desenvolvido por</Text>
-            <Text ff='monospace' fz='12px'>{user.name}</Text>
+            <Text ff='monospace' fz='12px'>powered by {user.login}</Text>
+            <Text fz='10px' c='dimmed' component="a" href="https://polygonscan.com/address/0x1F8D637B3d3fa444882A89d20445E202eD5AA319" target="_blank" ff='monospace'>Donations: 0x1F8D...A319 ❤️</Text>
           </Stack>
         </Group>
       )}

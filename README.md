@@ -1,4 +1,4 @@
-# atividade---FRONTEND---meu-primeiro-smartcontract---LUIZTOOLS
+# atividade---DAPP---meu-primeiro-smartcontract---LUIZTOOLS
 
 ## Sobre o projeto
 Esse projeto é uma pagina que simula apostas nos candidatos a presidencia do EUA, integrado a metamask e ultilizando um smartcontract desenvolvido em solidity
@@ -17,4 +17,3 @@ Projeto hospedado em:
 ## Screenshots
 <!-- ![App Screenshot](/public/picture_01.png) -->
 
-<!-- TODO - desenvolver pagina /bet/:id -->

@@ -17,7 +17,7 @@ const bets = [
   {
     BET_ID: '0002',
     BET_TITLE: 'São Paulo Election',
-    BET_WALLPAPER: 'eleicao-paulista.png',
+    BET_WALLPAPER: 'eleicao-americana.png',
     BET_OPTION_1: 'Pablo Marçal',
     BET_OPTION_2: 'Guilherme Boulos',
     BET_TOTAL_PRIZE: '$ 578,430.91'

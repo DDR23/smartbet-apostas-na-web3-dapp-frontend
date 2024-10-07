@@ -17,3 +17,4 @@ Projeto hospedado em:
 ## Screenshots
 <!-- ![App Screenshot](/public/picture_01.png) -->
 
+<!-- TODO - adicionar icone de engrenagem no header para rota de gerenciamente pra o owner -->

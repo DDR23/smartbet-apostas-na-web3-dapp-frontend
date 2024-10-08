@@ -9,6 +9,7 @@ import PageAbout from './pages/about/PageAbout.tsx';
 import PageBets from './pages/bets/PageBets.tsx';
 import PageBetId from './pages/betId/PageBetId.tsx';
 import { AuthProvider } from './contexts/AuthContext.tsx';
+import PageAdmin from './pages/admin/PageAdmin.tsx';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
           {
             path: '/bet/:id',
             element: <PageBetId />
+          },
+          {
+            path: '/admin',
+            element: <PageAdmin />
           },
         ]
       },

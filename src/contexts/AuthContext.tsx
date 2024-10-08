@@ -1,12 +1,15 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import ProviderWallet from '../services/ProviderWallet';
 import ProviderNotification from '../utils/ProviderNotification';
+import GetOwner from '../services/GetOwner';
 
 interface AuthContextType {
   walletAddress: string;
   connectWallet: () => Promise<void>;
   disconnectWallet: () => void;
   isLoading: boolean;
+  isOwner: boolean;
+  isInitializing: boolean; // Novo estado
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -14,11 +17,15 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [walletAddress, setWalletAddress] = useState<string>('');
+  const [isOwner, setIsOwner] = useState(false);
+  const [isInitializing, setIsInitializing] = useState(true);
 
   useEffect(() => {
     const savedWalletAddress = localStorage.getItem('walletAddress');
     if (savedWalletAddress) {
-      verifyConnection();
+      verifyConnection().finally(() => setIsInitializing(false));
+    } else {
+      setIsInitializing(false);
     }
   }, []);
 
@@ -41,6 +48,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         if (accounts.length > 0) {
           setWalletAddress(accounts[0]);
           localStorage.setItem('walletAddress', accounts[0]);
+          const owner = await GetOwner();
+          if (owner && owner.toLowerCase() === accounts[0].toLowerCase()) {
+            setIsOwner(true);
+          } else {
+            setIsOwner(false);
+          }
         } else {
           disconnectWallet();
         }
@@ -57,6 +70,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     } else if (accounts[0] !== walletAddress) {
       setWalletAddress(accounts[0]);
       localStorage.setItem('walletAddress', accounts[0]);
+      verifyOwnerStatus(accounts[0]);
+    }
+  };
+
+  const verifyOwnerStatus = async (account: string) => {
+    const owner = await GetOwner();
+    if (owner && owner.toLowerCase() === account.toLowerCase()) {
+      setIsOwner(true);
+    } else {
+      setIsOwner(false);
     }
   };
 
@@ -68,6 +91,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         const accounts = await web3.eth.requestAccounts();
         setWalletAddress(accounts[0]);
         localStorage.setItem('walletAddress', accounts[0]);
+        await verifyOwnerStatus(accounts[0]);
         ProviderNotification({ title: 'Success', message: 'Connected successfully' });
       } catch (error) {
         ProviderNotification({ title: 'Error', message: 'Unable to connect' });
@@ -79,12 +103,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const disconnectWallet = () => {
     setWalletAddress('');
-    localStorage.setItem('walletAddress', '');
+    setIsOwner(false);
+    localStorage.removeItem('walletAddress');
     ProviderNotification({ title: 'Success', message: 'Wallet disconnected' });
   };
 
   return (
-    <AuthContext.Provider value={{ walletAddress, connectWallet, disconnectWallet, isLoading }}>
+    <AuthContext.Provider value={{ walletAddress, connectWallet, disconnectWallet, isLoading, isOwner, isInitializing }}>
       {children}
     </AuthContext.Provider>
   );

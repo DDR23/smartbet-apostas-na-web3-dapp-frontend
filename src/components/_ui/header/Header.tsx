@@ -1,6 +1,6 @@
-import { Button, Group, Image, Modal, Stack, Text, UnstyledButton } from "@mantine/core";
+import { ActionIcon, Button, Group, Image, Modal, Stack, Text, UnstyledButton } from "@mantine/core";
 import ProviderDevice from "../../../utils/ProviderDevice";
-import { HiOutlineWallet } from "react-icons/hi2";
+import { HiOutlineCog6Tooth, HiOutlineWallet } from "react-icons/hi2";
 import { useEffect, useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import { AiOutlineSafety } from "react-icons/ai";
@@ -11,7 +11,7 @@ export default function Header() {
   const { isDesktop } = ProviderDevice();
   const [opened, { open, close }] = useDisclosure(false);
   const [modalContent, setModalContent] = useState<'connect' | ''>('');
-  const { connectWallet, isLoading, walletAddress } = useAuth();
+  const { connectWallet, isLoading, walletAddress, isOwner } = useAuth();
 
   const handleModalContent = (content: 'connect' | '') => {
     setModalContent(content);
@@ -69,6 +69,11 @@ export default function Header() {
           </Group>
         </UnstyledButton>
         <Group>
+          {isOwner && (
+            <ActionIcon size="lg" component="a" href="/admin">
+              <HiOutlineCog6Tooth size={22} />
+            </ActionIcon>
+          )}
           {walletAddress ? (
             <Group>
               <Text inline>{walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}</Text>

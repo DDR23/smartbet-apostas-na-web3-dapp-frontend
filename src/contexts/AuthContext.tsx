@@ -9,7 +9,7 @@ interface AuthContextType {
   disconnectWallet: () => void;
   isLoading: boolean;
   isOwner: boolean;
-  isInitializing: boolean; // Novo estado
+  isInitializing: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);

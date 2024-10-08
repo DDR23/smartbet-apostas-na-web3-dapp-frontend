@@ -1,4 +1,4 @@
-import { LoadingOverlay } from "@mantine/core";
+import { LoadingOverlay, Stack } from "@mantine/core";
 import { useAuth } from "../../contexts/AuthContext";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -24,8 +24,8 @@ export default function PageAdmin() {
   }
 
   return (
-    <div>
-      <h1>{isOwner ? 'Owner' : 'Not Owner'}</h1>
-    </div>
+    <Stack>
+      teste
+    </Stack>
   );
 }

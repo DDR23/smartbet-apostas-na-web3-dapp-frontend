@@ -5,14 +5,15 @@ import { useEffect, useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import { useAuth } from "../../../contexts/AuthContext";
 import ModalConnect from "../modals/ModalConnect";
+import ModalSettings from "../modals/ModalSettings";
 
 export default function Header() {
   const { isDesktop } = ProviderDevice();
   const [opened, { open, close }] = useDisclosure(false);
-  const [modalContent, setModalContent] = useState<'connect' | ''>('');
+  const [modalContent, setModalContent] = useState<'connect' | 'settings' | ''>('');
   const { walletAddress, isOwner } = useAuth();
 
-  const handleModalContent = (content: 'connect' | '') => {
+  const handleModalContent = (content: 'connect' | 'settings') => {
     setModalContent(content);
     open();
   }
@@ -23,22 +24,6 @@ export default function Header() {
       close();
     }
   }, [walletAddress]);
-
-  const modalConnect = () => {
-    return (
-      <Modal
-        size='auto'
-        opened={opened}
-        onClose={close}
-        withCloseButton={false}
-        overlayProps={{
-          backgroundOpacity: 0.55,
-          blur: 3
-        }}>
-        <ModalConnect />
-      </Modal>
-    )
-  }
 
   return (
     <>
@@ -51,7 +36,7 @@ export default function Header() {
         </UnstyledButton>
         <Group>
           {isOwner && (
-            <ActionIcon size="lg" component="a" href="/admin">
+            <ActionIcon size="lg" onClick={() => handleModalContent('settings')}>
               <HiOutlineCog6Tooth size={22} />
             </ActionIcon>
           )}
@@ -67,7 +52,18 @@ export default function Header() {
           )}
         </Group>
       </Group>
-      {modalContent === 'connect' && modalConnect()}
+      <Modal
+        size='auto'
+        opened={opened}
+        onClose={close}
+        withCloseButton={false}
+        overlayProps={{
+          backgroundOpacity: 0.55,
+          blur: 3
+        }}>
+        {modalContent === 'connect' && <ModalConnect />}
+        {modalContent === 'settings' && <ModalSettings />}
+      </Modal>
     </>
   );
 }

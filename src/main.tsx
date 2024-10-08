@@ -8,6 +8,7 @@ import './styles/globals.css'
 import PageAbout from './pages/about/PageAbout.tsx';
 import PageBets from './pages/bets/PageBets.tsx';
 import PageBetId from './pages/betId/PageBetId.tsx';
+import { AuthProvider } from './contexts/AuthContext.tsx';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );

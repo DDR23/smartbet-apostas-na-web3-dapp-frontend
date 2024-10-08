@@ -10,8 +10,8 @@ interface NotificationOptions {
 }
 
 export default function ProviderNotification({ title, message }: NotificationOptions) {
-  const notificationColor = title === 'Sucesso' ? 'green' : title === 'Alerta' ? 'Orange' : 'red';
-  const notificationIcon = title === 'Sucesso' ? <FaRegCircleCheck /> : title === 'Alerta' ? <LuAlertCircle /> : <TbXboxX />;
+  const notificationColor = title === 'Success' ? 'green' : title === 'Error' ? 'red' : 'orange';
+  const notificationIcon = title === 'Success' ? <FaRegCircleCheck /> : title === 'Error' ? <TbXboxX /> : <LuAlertCircle />;
 
   notifications.show({
     title: title,

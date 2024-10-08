@@ -1,9 +1,15 @@
 import { Carousel } from "@mantine/carousel";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Autoplay from 'embla-carousel-autoplay';
-import { BackgroundImage, Button, Flex, Paper, Stack, Text } from "@mantine/core";
+import { BackgroundImage, Button, Flex, Modal, Paper, Stack, Text } from "@mantine/core";
 import ProviderDevice from "../../../utils/ProviderDevice";
 import './index.css'
+import GetAllDisputes from "../../../services/GetAllDisputes";
+import { DisputesDetails } from "../../../types/DisputesDetails";
+import { useAuth } from "../../../contexts/AuthContext";
+import { HiOutlineWallet } from "react-icons/hi2";
+import ModalConnect from "../modals/ModalConnect";
+import { useDisclosure } from "@mantine/hooks";
 
 const bets = [
   {
@@ -26,7 +32,34 @@ const bets = [
 
 export default function CarouselBets() {
   const { isDesktop } = ProviderDevice();
+  const { walletAddress } = useAuth();
   const autoplay = useRef(Autoplay({ delay: 3000 }));
+  const [disputes, setDisputes] = useState<DisputesDetails[]>([]);
+  const [opened, { open, close }] = useDisclosure(false);
+
+  useEffect(() => {
+    getDisputes();
+  }, []);
+
+  useEffect(() => {
+    if (walletAddress) {
+      close();
+    }
+  }, [walletAddress]);
+
+  const getDisputes = async () => {
+    try {
+      const disputes = await GetAllDisputes();
+      if (disputes) {
+        setDisputes(disputes);
+      }
+    } catch (error) {
+      console.error('Error getting disputes:', error);
+    }
+  }
+
+  console.log(disputes);
+  // TODO - adicionar get em disputa por id
 
   useEffect(() => {
     const autoplayInstance = autoplay.current;
@@ -34,6 +67,23 @@ export default function CarouselBets() {
       autoplayInstance.stop();
     };
   }, []);
+
+
+  const modalConnect = () => {
+    return (
+      <Modal
+        size='auto'
+        opened={opened}
+        onClose={close}
+        withCloseButton={false}
+        overlayProps={{
+          backgroundOpacity: 0.55,
+          blur: 3
+        }}>
+        <ModalConnect />
+      </Modal>
+    );
+  }
 
   const slides = bets.map((row) => (
     <Carousel.Slide key={row.BET_ID}>
@@ -52,7 +102,14 @@ export default function CarouselBets() {
                 <Text mx='md' inline>vs</Text>
                 <Text fw={700} fz='h3' inline>{row.BET_OPTION_2}</Text>
               </Flex>
-              <Button component="a" href={`/bet/${row.BET_ID}`} fullWidth bg='green'>Bet now</Button>
+              {walletAddress ? (
+                <Button component="a" href={`/bet/${row.BET_ID}`} fullWidth bg='green'>Bet now</Button>
+              ) : (
+                <Button px={isDesktop ? 'xs' : '8'} onClick={open}>
+                  <HiOutlineWallet size={22} />
+                  <Text visibleFrom="xs" pl='8'>Connect wallet</Text>
+                </Button>
+              )}
             </Stack>
           </Paper>
         </Flex>
@@ -76,6 +133,7 @@ export default function CarouselBets() {
       >
         {slides}
       </Carousel>
+      {modalConnect()}
     </>
   );
 }

@@ -1,17 +1,16 @@
-import { ActionIcon, Button, Group, Image, Modal, Stack, Text, UnstyledButton } from "@mantine/core";
+import { ActionIcon, Button, Group, Image, Modal, Text, UnstyledButton } from "@mantine/core";
 import ProviderDevice from "../../../utils/ProviderDevice";
 import { HiOutlineCog6Tooth, HiOutlineWallet } from "react-icons/hi2";
 import { useEffect, useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
-import { AiOutlineSafety } from "react-icons/ai";
 import { useAuth } from "../../../contexts/AuthContext";
-import { Window } from "../../../types/web3config";
+import ModalConnect from "../modals/ModalConnect";
 
 export default function Header() {
   const { isDesktop } = ProviderDevice();
   const [opened, { open, close }] = useDisclosure(false);
   const [modalContent, setModalContent] = useState<'connect' | ''>('');
-  const { connectWallet, isLoading, walletAddress, isOwner } = useAuth();
+  const { walletAddress, isOwner } = useAuth();
 
   const handleModalContent = (content: 'connect' | '') => {
     setModalContent(content);
@@ -36,25 +35,7 @@ export default function Header() {
           backgroundOpacity: 0.55,
           blur: 3
         }}>
-        <Stack align="center" gap="xs" w='16rem'>
-          <Text>Connect Wallet</Text>
-          <Button
-            justify="center"
-            fullWidth
-            px='lg'
-            leftSection={<Image src='/metamask.png' alt='metamask' width={26} height={26} />}
-            onClick={connectWallet}
-            loading={isLoading}
-          >
-            Metamask
-            <Text fz='12' c='green' ml='xs' inline>{(window as Window).ethereum ? 'detected' : ''}</Text>
-          </Button>
-          <Button disabled justify="center" fullWidth px='lg' leftSection={<Image src='/phantom.png' alt='phantom' width={26} height={26} />}>Phantom - Coming soon</Button>
-          <Group gap={4} c='green' mt='xs'>
-            <AiOutlineSafety size={16} />
-            <Text fz="xs" inline>Secure connection</Text>
-          </Group>
-        </Stack>
+        <ModalConnect />
       </Modal>
     )
   }

@@ -1,10 +1,14 @@
 import SmartbetDisputes from "../abis/SmartbetDisputes.json";
+import { DisputesDetails } from "../types/DisputesDetails";
 import ProviderWallet from "./ProviderWallet";
 
 interface Contract {
   methods: {
     owner: () => {
       call: () => Promise<string>;
+    };
+    getAllDisputeIds: () => {
+      call: () => Promise<DisputesDetails[]>;
     };
   };
 }

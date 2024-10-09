@@ -29,12 +29,12 @@ export default function PageBetId() {
         </Stack>
         <Flex gap={isDesktop ? '100px' : 'xl'} w='100%' justify='center'>
           <Stack flex={1} gap='xs' align='center' maw={isDesktop ? '15rem' : '8rem'}>
-            <Avatar src='/coin_02.png' size={isDesktop ? '15rem' : '8rem'} radius='xl' />
+            <Avatar src='https://i.ibb.co/0fNjkDp/Donald-Trupm.jpg' size={isDesktop ? '15rem' : '8rem'} radius='xl' />
             <Text fz='sm' fw={700} inline>Guilherme Boulos</Text>
             <Button fullWidth bg='green'>Bet now</Button>
           </Stack>
           <Stack flex={1} gap='xs' align='center' maw={isDesktop ? '15rem' : '8rem'}>
-            <Avatar src='/coin_07.png' size={isDesktop ? '15rem' : '8rem'} radius='xl' />
+            <Avatar src='https://i.ibb.co/HDz3m80/Kamala-Harris.jpg' size={isDesktop ? '15rem' : '8rem'} radius='xl' />
             <Text fz='sm' fw={700} inline>Pablo Marçal</Text>
             <Button fullWidth bg='green'>Bet now</Button>
           </Stack>

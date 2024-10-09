@@ -27,7 +27,7 @@ export default function Header() {
 
   return (
     <>
-      <Group pos='sticky' top='0' w='100%' px="lg" justify="space-between" bg='background' py='xs' gap={0} style={{ borderBottom: '1px solid #23232320' }}>
+      <Group pos='sticky' top='0' w='100%' px="lg" justify="space-between" bg='background' py='xs' gap={0} style={{ borderBottom: '1px solid #23232320', zIndex: 10 }}>
         <UnstyledButton component="a" href="/">
           <Group>
             <Image src='/coin.png' alt="logo-smartbet" style={{ width: '2rem' }} />

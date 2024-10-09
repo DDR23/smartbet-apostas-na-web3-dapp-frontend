@@ -10,6 +10,16 @@ interface Contract {
     getAllDisputeIds: () => {
       call: () => Promise<DisputesDetails[]>;
     };
+    createDispute: (
+      disputeName: string,
+      disputeWallpaper: string,
+      disputeCandidate1: string,
+      disputeCandidateImage1: string,
+      disputeCandidate2: string,
+      disputeCandidateImage2: string
+    ) => {
+      send: (args: any) => Promise<any>;
+    };
   };
 }
 

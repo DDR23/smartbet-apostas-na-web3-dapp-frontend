@@ -6,7 +6,7 @@ export default function ModalSettings() {
     <Stack align="center" gap="xs" w='16rem'>
       <Text>My settings</Text>
       <Button justify="center" fullWidth px='lg' component="a" href="/admin/createbet">
-        Create a new Bet
+        Create Bet
       </Button>
       <Button disabled justify="center" fullWidth px='lg'>Dashboard - Coming soon</Button>
       <Group gap={4} c='green' mt='xs'>

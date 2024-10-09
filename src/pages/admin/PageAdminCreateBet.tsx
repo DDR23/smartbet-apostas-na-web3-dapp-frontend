@@ -4,17 +4,17 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { useForm } from "react-hook-form";
-import { SchemaCreateBet } from "../../schemas/SchemaCreateBet";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { PostDisputesDetails } from "../../types/DisputesDetails";
 import { postDispute } from "../../services/PostDispute";
 import { RiShareBoxFill } from "react-icons/ri";
 import { FaRegCircleCheck } from "react-icons/fa6";
+import { SchemaCreateDispute } from "../../schemas/SchemaCreateDispute";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function PageAdminCreateBet() {
   const { register, handleSubmit, reset } = useForm({
     mode: 'onBlur',
-    resolver: yupResolver(SchemaCreateBet)
+    resolver: yupResolver(SchemaCreateDispute)
   });
   const { isOwner, isLoading, isInitializing, walletAddress, connectWallet } = useAuth();
   const navigate = useNavigate();
@@ -63,7 +63,7 @@ export default function PageAdminCreateBet() {
         <Stack gap='xs' w='100%'>
           {isPosted ? (
             <>
-              <Text ff='heading' fw={700} fz='h1' c='indigo'>Bet created successfully</Text>
+              <Text ff='heading' fw={700} fz='h1' c='indigo'>Dispute created successfully</Text>
               <Center m='lg'>
                 <FaRegCircleCheck size={130} color='green' />
               </Center>

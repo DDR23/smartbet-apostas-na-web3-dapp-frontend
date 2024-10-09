@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-export const SchemaCreateBet = yup.object().shape({
+export const SchemaCreateDispute = yup.object().shape({
   _disputeName: yup
     .string()
     .required(),

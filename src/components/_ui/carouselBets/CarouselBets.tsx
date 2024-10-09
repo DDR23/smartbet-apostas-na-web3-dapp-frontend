@@ -11,6 +11,8 @@ import { HiOutlineWallet } from "react-icons/hi2";
 import ModalConnect from "../modals/ModalConnect";
 import { useDisclosure } from "@mantine/hooks";
 import GetDisputeById from "../../../services/GetDisputeById";
+import { formatPOL } from "../../../utils/FormatPol";
+import ProviderNotification from "../../../utils/ProviderNotification";
 
 export default function CarouselBets() {
   const { isDesktop } = ProviderDevice();
@@ -46,7 +48,6 @@ export default function CarouselBets() {
           GetDisputeById(index.toString())
         );
         const resolvedDetailedDisputes = await Promise.all(detailedDisputesPromises);
-        console.log(resolvedDetailedDisputes);
         setDetailedDisputes(
           resolvedDetailedDisputes
             .filter((dispute): dispute is DisputesDetails =>
@@ -55,7 +56,7 @@ export default function CarouselBets() {
         );
       }
     } catch (error) {
-      console.error('Error getting disputes:', error);
+      ProviderNotification({ title: 'Error', message: 'Failed to load disputes' });
     } finally {
       setIsLoading(false);
     }
@@ -87,7 +88,7 @@ export default function CarouselBets() {
                 <Text fw={700} fz={isDesktop ? 'h1' : 'h2'} mb='sm' inline>{row.disputeName.toLocaleUpperCase()}</Text>
                 <Text fz='lg' inline>🔥</Text>
                 <Text fz='xs'>Total accumulated</Text>
-                <Text fw={700} fz='md' inline>{row.disputeNetPrize ? row.disputeNetPrize.toString() : '0 POL'}</Text>
+                <Text fw={700} fz='md' inline>{row.disputeNetPrize ? formatPOL(Number(row.disputeNetPrize)) : '0 POL'}</Text>
               </Flex>
               <Flex justify="center" direction={isDesktop ? 'row' : 'column'}>
                 <Text fw={700} fz='h3' inline>{row.disputeCandidate1}</Text>
@@ -95,7 +96,7 @@ export default function CarouselBets() {
                 <Text fw={700} fz='h3' inline>{row.disputeCandidate2}</Text>
               </Flex>
               {walletAddress ? (
-                <Button component="a" href={`/bet/${row.disputeName}`} fullWidth bg='green'>Bet now</Button>
+                <Button component="a" href={`/bet/${index + 1}`} fullWidth bg='green'>Bet now</Button>
               ) : (
                 <Button px={isDesktop ? 'xs' : '8'} onClick={open}>
                   <HiOutlineWallet size={22} />

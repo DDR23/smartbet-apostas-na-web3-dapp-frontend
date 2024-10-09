@@ -58,7 +58,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           disconnectWallet();
         }
       } catch (error) {
-        console.error('Error verifying connection:', error);
+        ProviderNotification({ title: 'Error', message: 'Unable to connect' });
         disconnectWallet();
       }
     }

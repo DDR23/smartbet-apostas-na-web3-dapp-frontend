@@ -9,7 +9,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { PostDisputesDetails } from "../../types/DisputesDetails";
 import { postDispute } from "../../services/PostDispute";
 import { RiShareBoxFill } from "react-icons/ri";
-import { notifications } from "@mantine/notifications";
 
 export default function PageAdminCreateBet() {
   const { register, handleSubmit, reset } = useForm({
@@ -46,10 +45,7 @@ export default function PageAdminCreateBet() {
       setIsPosted(true);
       reset();
     } catch (error) {
-      notifications.show({
-        title: "Falha na criação da aposta",
-        message: "Ocorreu um erro ao tentar criar a aposta. Verifique os detalhes abaixo.",
-      });
+      console.log('PageAdminCreateBet =', error);
     } finally {
       setIsLoadingTx(false);
     }

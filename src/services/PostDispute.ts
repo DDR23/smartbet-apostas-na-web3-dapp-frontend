@@ -1,13 +1,13 @@
-import { notifications } from "@mantine/notifications";
 import { PostDisputesDetails } from "../types/DisputesDetails";
 import ProviderContract from "./ProviderContract";
 import ProviderWallet from "./ProviderWallet";
+import ProviderNotification from "../utils/ProviderNotification";
 
 export async function postDispute(data: PostDisputesDetails) {
   try {
     const web3 = ProviderWallet();
     if (!web3) {
-      notifications.show({
+      ProviderNotification({
         title: "Error",
         message: "Error getting wallet",
       });
@@ -16,7 +16,7 @@ export async function postDispute(data: PostDisputesDetails) {
 
     const contract = ProviderContract();
     if (!contract) {
-      notifications.show({
+      ProviderNotification({
         title: "Error",
         message: "Error getting contract",
       });
@@ -35,13 +35,13 @@ export async function postDispute(data: PostDisputesDetails) {
       data._disputeCandidateImage2
     ).send({ from: sender });
 
-    notifications.show({
+    ProviderNotification({
       title: "Success",
       message: "Dispute created successfully",
     });
-    return tx.transactionHash;
+    return tx;
   } catch (error) {
-    notifications.show({
+    ProviderNotification({
       title: "Error",
       message: "Error creating dispute",
     });

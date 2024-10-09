@@ -36,6 +36,12 @@ interface Contract {
     ) => {
       call: () => Promise<BetsDetails>;
     };
+    finishDispute: (
+      disputeId: number,
+      winner: number
+    ) => {
+      send: (args: any) => Promise<any>;
+    };
   };
 }
 

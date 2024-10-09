@@ -6,7 +6,7 @@ export default function ProviderWallet(): Web3 | void {
   const { ethereum } = window as Window;
 
   if (!ethereum) {
-    ProviderNotification({ title: 'Alerta', message: 'Você precisa instalar a MetaMask' });
+    ProviderNotification({ title: 'Alert', message: 'You need to install MetaMask' });
     return;
   }
 

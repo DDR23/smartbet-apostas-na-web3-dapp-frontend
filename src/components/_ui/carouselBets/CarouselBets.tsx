@@ -1,7 +1,7 @@
 import { Carousel } from "@mantine/carousel";
 import { useRef, useEffect, useState } from "react";
 import Autoplay from 'embla-carousel-autoplay';
-import { BackgroundImage, Button, Center, Flex, Modal, Paper, Stack, Text, Loader } from "@mantine/core";
+import { BackgroundImage, Button, Center, Flex, Modal, Paper, Stack, Text, Loader, Badge } from "@mantine/core";
 import ProviderDevice from "../../../utils/ProviderDevice";
 import './index.css'
 import GetAllDisputes from "../../../services/GetAllDisputes";
@@ -49,10 +49,7 @@ export default function CarouselBets() {
         );
         const resolvedDetailedDisputes = await Promise.all(detailedDisputesPromises);
         setDetailedDisputes(
-          resolvedDetailedDisputes
-            .filter((dispute): dispute is DisputesDetails =>
-              dispute !== null && dispute.disputeWinner === BigInt(0)
-            )
+          resolvedDetailedDisputes.filter((dispute): dispute is DisputesDetails => dispute !== null)
         );
       }
     } catch (error) {
@@ -84,7 +81,8 @@ export default function CarouselBets() {
         <Flex direction='column' maw='90vw' ta='center' mx='auto' py='2.5rem' align='center' justify='flex-end' h='100%'>
           <Paper p='lg' bg='#23232350' style={{ backdropFilter: `blur(2px)` }}>
             <Stack px='md' c='white'>
-              <Flex direction='column'>
+              <Flex direction='column' align='center'>
+                <Badge mb='xs' variant="dot" color={Number(!row.disputeWinner) ? 'green' : 'red'}>{Number(!row.disputeWinner) ? 'running' : 'finished'}</Badge>
                 <Text fw={700} fz={isDesktop ? 'h1' : 'h2'} mb='sm' inline>{row.disputeName.toLocaleUpperCase()}</Text>
                 <Text fz='lg' inline>🔥</Text>
                 <Text fz='xs'>Total accumulated</Text>
@@ -131,6 +129,10 @@ export default function CarouselBets() {
         >
           {slides}
         </Carousel>
+      ) : !(window as any).ethereum ? (
+        <Center bg='dimmed' w='100vw' h='57vh'>
+          <Text fz='h1'>Install Metamask first</Text>
+        </Center>
       ) : (
         <Center bg='dimmed' w='100vw' h='57vh'>
           <Text fz='h1'>No disputes available at the moment</Text>

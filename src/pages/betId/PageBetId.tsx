@@ -13,10 +13,11 @@ import { RiShareBoxFill } from "react-icons/ri";
 import { useAuth } from "../../contexts/AuthContext";
 import { GetBetDetails } from "../../services/GetBetDetails";
 import { formatPOL } from "../../utils/FormatPol";
+import FinishDispute from "../../services/FinishDipute";
 
 export default function PageBetId() {
   const { isDesktop } = ProviderDevice();
-  const { walletAddress } = useAuth();
+  const { walletAddress, isOwner } = useAuth();
   const { id } = useParams();
   const [dispute, setDispute] = useState<DisputesDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -27,7 +28,7 @@ export default function PageBetId() {
     number: number;
   } | null>(null);
   const [amount, setAmount] = useState<number | ''>(1000000);
-  const [txHash, setTxHash] = useState<string | null>(null);
+  const [txHashBet, setTxHashBet] = useState<string | null>(null);
   const [isPosted, setIsPosted] = useState(false);
   const [isLoadingTx, setIsLoadingTx] = useState(false);
   const [betDetails, setBetDetails] = useState<BetsDetails | null>(null);
@@ -53,7 +54,7 @@ export default function PageBetId() {
     try {
       setIsLoadingTx(true);
       const tx = await postBet(data);
-      setTxHash(tx.transactionHash);
+      setTxHashBet(tx.transactionHash);
       setIsPosted(true);
     } catch (error) {
       return;
@@ -61,7 +62,18 @@ export default function PageBetId() {
       setAmount(1000000);
       setIsLoadingTx(false);
     }
-  }
+  };
+
+  const stopDispute = async (winner: number) => {
+    try {
+      setIsLoadingTx(true);
+      await FinishDispute(Number(id), winner);
+    } catch (error) {
+      return;
+    } finally {
+      setIsLoadingTx(false);
+    }
+  };
 
   const handleOpen = (candidate: 'candidate1' | 'candidate2') => {
     const candidateData = {
@@ -111,22 +123,42 @@ export default function PageBetId() {
                   </Progress.Section>
                 </Progress.Root>
               </Stack>
-              <Flex gap={isDesktop ? '100px' : 'xl'} w='100%' justify='center'>
+              {Number(dispute?.disputeWinner) === 1 ? (
                 <Stack flex={1} gap='xs' align='center' maw={isDesktop ? '15rem' : '8rem'}>
+                  <Text fz='h1' fw={700} inline>winner</Text>
                   <Avatar src={dispute?.disputeCandidateImage1} size={isDesktop ? '15rem' : '8rem'} radius='xl' />
                   <Text fz='sm' fw={700} inline>{dispute?.disputeCandidate1}</Text>
-                  {Number(betDetails?.amount) === 0 && (
-                    <Button fullWidth bg='green' onClick={() => handleOpen('candidate1')}>Bet now</Button>
-                  )}
                 </Stack>
+              ) : Number(dispute?.disputeWinner) === 2 ? (
                 <Stack flex={1} gap='xs' align='center' maw={isDesktop ? '15rem' : '8rem'}>
+                  <Text fz='h1' fw={700} inline>winner</Text>
                   <Avatar src={dispute?.disputeCandidateImage2} size={isDesktop ? '15rem' : '8rem'} radius='xl' />
                   <Text fz='sm' fw={700} inline>{dispute?.disputeCandidate2}</Text>
-                  {Number(betDetails?.amount) === 0 && (
-                    <Button fullWidth bg='green' onClick={() => handleOpen('candidate2')}>Bet now</Button>
-                  )}
                 </Stack>
-              </Flex>
+              ) : (
+                <Flex gap={isDesktop ? '100px' : 'xl'} w='100%' justify='center'>
+                  <Stack flex={1} gap='xs' align='center' maw={isDesktop ? '15rem' : '8rem'}>
+                    <Avatar src={dispute?.disputeCandidateImage1} size={isDesktop ? '15rem' : '8rem'} radius='xl' />
+                    <Text fz='sm' fw={700} inline>{dispute?.disputeCandidate1}</Text>
+                    {!isOwner && Number(betDetails?.amount) === 0 && (
+                      <Button fullWidth bg='green' onClick={() => handleOpen('candidate1')}>Bet now</Button>
+                    )}
+                    {isOwner && (
+                      <Button fullWidth onClick={() => stopDispute(1)} loading={isLoadingTx}>Declare winner</Button>
+                    )}
+                  </Stack>
+                  <Stack flex={1} gap='xs' align='center' maw={isDesktop ? '15rem' : '8rem'}>
+                    <Avatar src={dispute?.disputeCandidateImage2} size={isDesktop ? '15rem' : '8rem'} radius='xl' />
+                    <Text fz='sm' fw={700} inline>{dispute?.disputeCandidate2}</Text>
+                    {!isOwner && Number(betDetails?.amount) === 0 && (
+                      <Button fullWidth bg='green' onClick={() => handleOpen('candidate2')}>Bet now</Button>
+                    )}
+                    {isOwner && (
+                      <Button fullWidth onClick={() => stopDispute(2)} loading={isLoadingTx}>Declare winner</Button>
+                    )}
+                  </Stack>
+                </Flex>
+              )}
               {Number(betDetails?.amount) > 0 && (
                 <Stack>
                   <Stack gap={0} >
@@ -139,7 +171,7 @@ export default function PageBetId() {
             </>
           )}
         </Stack>
-        < Image src='/coin.png' alt="logo-smartbet" w={30} />
+        <Image src='/coin.png' alt="logo-smartbet" w={30} />
       </Stack >
       <Modal
         size='auto'
@@ -165,8 +197,8 @@ export default function PageBetId() {
                 </Center>
                 <Text>
                   Transaction Hash:
-                  <Text ml='2' fz='sm' c='indigo' ff='monospace' component='a' href={`https://amoy.polygonscan.com/tx/${txHash}`} target="_blank">
-                    {txHash?.slice(0, 6)}...{txHash?.slice(-4)}<RiShareBoxFill size={16} />
+                  <Text ml='2' fz='sm' c='indigo' ff='monospace' component='a' href={`https://amoy.polygonscan.com/tx/${txHashBet}`} target="_blank">
+                    {txHashBet?.slice(0, 6)}...{txHashBet?.slice(-4)}<RiShareBoxFill size={16} />
                   </Text>
                 </Text>
               </>

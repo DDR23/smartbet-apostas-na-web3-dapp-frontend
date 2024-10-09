@@ -71,7 +71,11 @@ export default function PageHome() {
             <Text fz={isDesktop ? '1.5vw' : 'md'} fw='bold' c='indigo'>On-chain Betting with Confidence 💵🔥</Text>
             <Text fz={isDesktop ? '1.2vw' : 'sm'} w={isDesktop ? '30vw' : '80vw'}>
               Place your bets safely and transparently. <Text span c="indigo" inherit fw='500'>Revolutionize your betting experience</Text> on the blockchain.</Text>
-            <Button variant="filled" component="a" href="/bets" mt='lg' w={isDesktop ? 'max-content' : 'auto'} px='5vw' size="md">Go to betting panel</Button>
+            {!(window as any).ethereum ? (
+              <Button disabled variant="filled" mt='lg' w={isDesktop ? 'max-content' : 'auto'} px='5vw' size="md">Install Metamask first</Button>
+            ) : (
+              <Button variant="filled" component="a" href="/bets" mt='lg' w={isDesktop ? 'max-content' : 'auto'} px='5vw' size="md">Go to bets</Button>
+            )}
           </Stack>
         </Stack>
       </Flex>

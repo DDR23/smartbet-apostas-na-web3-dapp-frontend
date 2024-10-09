@@ -16,7 +16,7 @@ import ProviderNotification from "../../../utils/ProviderNotification";
 
 export default function CarouselBets() {
   const { isDesktop } = ProviderDevice();
-  const { walletAddress } = useAuth();
+  const { walletAddress, isOwner } = useAuth();
   const autoplay = useRef(Autoplay({ delay: 3000 }));
   const [detailedDisputes, setDetailedDisputes] = useState<DisputesDetails[]>([]);
   const [opened, { open, close }] = useDisclosure(false);
@@ -82,7 +82,7 @@ export default function CarouselBets() {
           <Paper p='lg' bg='#23232350' style={{ backdropFilter: `blur(2px)` }}>
             <Stack px='md' c='white'>
               <Flex direction='column' align='center'>
-                <Badge mb='xs' variant="dot" color={Number(!row.disputeWinner) ? 'green' : 'red'}>{Number(!row.disputeWinner) ? 'running' : 'finished'}</Badge>
+                <Badge mb='xs' variant="outline" color={Number(!row.disputeWinner) ? 'green' : 'red.7'}>{Number(!row.disputeWinner) ? 'running' : 'finished'}</Badge>
                 <Text fw={700} fz={isDesktop ? 'h1' : 'h2'} mb='sm' inline>{row.disputeName.toLocaleUpperCase()}</Text>
                 <Text fz='lg' inline>🔥</Text>
                 <Text fz='xs'>Total accumulated</Text>
@@ -94,7 +94,7 @@ export default function CarouselBets() {
                 <Text fw={700} fz='h3' inline>{row.disputeCandidate2}</Text>
               </Flex>
               {walletAddress ? (
-                <Button component="a" href={`/bet/${index + 1}`} fullWidth bg='green'>Bet now</Button>
+                <Button component="a" href={`/bet/${index + 1}`} color={isOwner ? '' : 'green'} fullWidth>{isOwner ? 'Details' : Number(row.disputeWinner) === 0 ? 'Bet now' : 'More details'}</Button>
               ) : (
                 <Button px={isDesktop ? 'xs' : '8'} onClick={open}>
                   <HiOutlineWallet size={22} />

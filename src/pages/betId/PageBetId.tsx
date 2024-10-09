@@ -72,6 +72,7 @@ export default function PageBetId() {
       return;
     } finally {
       setIsLoadingTx(false);
+      window.location.reload()
     }
   };
 
@@ -108,7 +109,7 @@ export default function PageBetId() {
             <>
               <Stack w='max-content' maw='100%' gap='0' align='center'>
                 <Flex direction='column' mb='xs' align='center'>
-                  <Badge mb='xs' variant="outline" color={Number(!dispute?.disputeWinner) ? 'green' : 'red'}>{Number(!dispute?.disputeWinner) ? 'running' : 'finished'}</Badge>
+                  <Badge mb='xs' variant="outline" color={Number(!dispute?.disputeWinner) ? 'green' : 'red.7'}>{Number(!dispute?.disputeWinner) ? 'running' : 'finished'}</Badge>
                   <Text fw={700} fz={isDesktop ? 'h1' : 'h2'} mb='sm' inline>{dispute?.disputeName}</Text>
                   <Text fz='lg' inline>🔥</Text>
                   <Text fz='xs'>Total accumulated</Text>
@@ -124,20 +125,20 @@ export default function PageBetId() {
                 </Progress.Root>
               </Stack>
               {Number(dispute?.disputeWinner) === 1 ? (
-                <Stack flex={1} gap='xs' align='center' maw={isDesktop ? '15rem' : '8rem'}>
+                <Stack gap='xs' align='center' maw={isDesktop ? '15rem' : '8rem'}>
                   <Text fz='h1' fw={700} inline>winner</Text>
                   <Avatar src={dispute?.disputeCandidateImage1} size={isDesktop ? '15rem' : '8rem'} radius='xl' />
                   <Text fz='sm' fw={700} inline>{dispute?.disputeCandidate1}</Text>
                 </Stack>
               ) : Number(dispute?.disputeWinner) === 2 ? (
-                <Stack flex={1} gap='xs' align='center' maw={isDesktop ? '15rem' : '8rem'}>
+                <Stack gap='xs' align='center' maw={isDesktop ? '15rem' : '8rem'}>
                   <Text fz='h1' fw={700} inline>winner</Text>
                   <Avatar src={dispute?.disputeCandidateImage2} size={isDesktop ? '15rem' : '8rem'} radius='xl' />
                   <Text fz='sm' fw={700} inline>{dispute?.disputeCandidate2}</Text>
                 </Stack>
               ) : (
                 <Flex gap={isDesktop ? '100px' : 'xl'} w='100%' justify='center'>
-                  <Stack flex={1} gap='xs' align='center' maw={isDesktop ? '15rem' : '8rem'}>
+                  <Stack flex={1} gap='xs' align='center' maw={isDesktop ? '15rem' : '10rem'}>
                     <Avatar src={dispute?.disputeCandidateImage1} size={isDesktop ? '15rem' : '8rem'} radius='xl' />
                     <Text fz='sm' fw={700} inline>{dispute?.disputeCandidate1}</Text>
                     {!isOwner && Number(betDetails?.amount) === 0 && (
@@ -147,7 +148,7 @@ export default function PageBetId() {
                       <Button fullWidth onClick={() => stopDispute(1)} loading={isLoadingTx}>Declare winner</Button>
                     )}
                   </Stack>
-                  <Stack flex={1} gap='xs' align='center' maw={isDesktop ? '15rem' : '8rem'}>
+                  <Stack flex={1} gap='xs' align='center' maw={isDesktop ? '15rem' : '10rem'}>
                     <Avatar src={dispute?.disputeCandidateImage2} size={isDesktop ? '15rem' : '8rem'} radius='xl' />
                     <Text fz='sm' fw={700} inline>{dispute?.disputeCandidate2}</Text>
                     {!isOwner && Number(betDetails?.amount) === 0 && (
@@ -159,13 +160,29 @@ export default function PageBetId() {
                   </Stack>
                 </Flex>
               )}
-              {Number(betDetails?.amount) > 0 && (
+              {Number(betDetails?.amount) > 0 ? (
                 <Stack>
                   <Stack gap={0} >
-                    <Text inline>You have already bet on this dispute</Text>
-                    <Text inline fz='sm' c='dimmed'>wait for the dispute to finish to claim your prize</Text>
+                    {Number(dispute?.disputeWinner) === 0 ? (
+                      <>
+                        <Text inline>You have already bet on this dispute</Text>
+                        <Text inline fz='sm' c='dimmed'>wait for the dispute to finish to claim your prize</Text>
+                      </>
+                    ) : (
+                      <>
+                        <Text inline>Prize is already available for withdrawal</Text>
+                        <Text inline fz='sm' c='dimmed'>You can withdraw your prize</Text>
+                      </>
+                    )}
                   </Stack>
-                  <Button disabled={Number(dispute?.disputeWinner) === 0} color='green' leftSection={<Image src='/coin.png' alt="logo-smartbet" w={20} />}>claim your prize</Button>
+                  <Button disabled={Number(dispute?.disputeWinner) === 0} color='green' leftSection={<Image src='/coin.png' alt="logo-smartbet" w={20} />}>claim now</Button>
+                </Stack>
+              ) : !isOwner && Number(betDetails?.amount) <= 0 && Number(dispute?.disputeWinner) !== 0 && (
+                <Stack>
+                  <Stack gap='xs' >
+                    <Text inline fz='sm' c='dimmed'>You don't have bet on this dispute</Text>
+                    <Button disabled color='green' leftSection={<Image src='/coin.png' alt="logo-smartbet" w={20} />}>claim your prize</Button>
+                  </Stack>
                 </Stack>
               )}
             </>

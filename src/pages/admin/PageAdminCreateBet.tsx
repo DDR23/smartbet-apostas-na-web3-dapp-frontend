@@ -1,4 +1,4 @@
-import { ActionIcon, Button, Divider, Flex, Group, Image, LoadingOverlay, SimpleGrid, Stack, Text, TextInput } from "@mantine/core";
+import { ActionIcon, Button, Center, Divider, Flex, Group, Image, LoadingOverlay, SimpleGrid, Stack, Text, TextInput } from "@mantine/core";
 import { useAuth } from "../../contexts/AuthContext";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { PostDisputesDetails } from "../../types/DisputesDetails";
 import { postDispute } from "../../services/PostDispute";
 import { RiShareBoxFill } from "react-icons/ri";
+import { FaRegCircleCheck } from "react-icons/fa6";
 
 export default function PageAdminCreateBet() {
   const { register, handleSubmit, reset } = useForm({
@@ -45,7 +46,6 @@ export default function PageAdminCreateBet() {
       setIsPosted(true);
       reset();
     } catch (error) {
-      console.log('PageAdminCreateBet =', error);
     } finally {
       setIsLoadingTx(false);
     }
@@ -59,15 +59,14 @@ export default function PageAdminCreateBet() {
         </ActionIcon>
         <Button size='compact-lg' component="a" href="/bets" variant="default" c='indigo'>Bets</Button>
       </Group>
-
-
       <Stack flex={1} miw='70vw' maw='90vw' gap='lg' ta='center' mx='auto' justify="space-between">
-
-
         <Stack gap='xs' w='100%'>
           {isPosted ? (
             <>
               <Text ff='heading' fw={700} fz='h1' c='indigo'>Bet created successfully</Text>
+              <Center m='lg'>
+                <FaRegCircleCheck size={130} color='green' />
+              </Center>
               <Text>
                 Transaction Hash:
                 <Text ml='2' fz='sm' c='indigo' ff='monospace' component='a' href={`https://amoy.polygonscan.com/tx/${txHash}`} target="_blank">
@@ -102,8 +101,6 @@ export default function PageAdminCreateBet() {
             </>
           )}
         </Stack>
-
-
         <Flex direction='column' justify='center' align='center' gap='0' mt='xs'>
           <Group gap='xs' justify='center'>
             <Image src='/coin.png' alt="logo-smartbet" w={30} />
@@ -111,11 +108,7 @@ export default function PageAdminCreateBet() {
           </Group>
           <Text fz='xs' ff='monospace'>On-chain Betting with Confidence 💵🔥</Text>
         </Flex>
-
-
       </Stack>
-
-
     </Stack>
   );
 }

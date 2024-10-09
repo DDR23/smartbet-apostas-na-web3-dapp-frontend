@@ -26,6 +26,10 @@ export async function postDispute(data: PostDisputesDetails) {
     const accounts = await web3.eth.getAccounts();
     const sender = accounts[0];
 
+    const gasPrice = await web3.eth.getGasPrice();
+
+    const adjustedGasPrice = Math.round(Number(gasPrice) * 1.2).toString();
+
     const tx = await contract.methods.createDispute(
       data._disputeName,
       data._disputeWallpaper,
@@ -33,7 +37,10 @@ export async function postDispute(data: PostDisputesDetails) {
       data._disputeCandidateImage1,
       data._disputeCandidate2,
       data._disputeCandidateImage2
-    ).send({ from: sender });
+    ).send({ 
+      from: sender,
+      gasPrice: adjustedGasPrice
+    });
 
     ProviderNotification({
       title: "Success",

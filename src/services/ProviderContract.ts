@@ -20,6 +20,9 @@ interface Contract {
     ) => {
       send: (args: any) => Promise<any>;
     };
+    disputes: (id: string) => {
+      call: () => Promise<DisputesDetails>;
+    };
   };
 }
 

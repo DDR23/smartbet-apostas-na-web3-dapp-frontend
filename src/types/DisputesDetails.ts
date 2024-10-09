@@ -3,13 +3,13 @@ export interface DisputesDetails {
   disputeWallpaper: string;
   disputeCandidate1: string;
   disputeCandidateImage1: string;
-  disputeCandidateBet1: number;
+  disputeCandidateBet1: bigint;
   disputeCandidate2: string;
   disputeCandidateImage2: string;
-  disputeCandidateBet2: number;
-  disputeWinner: number;
-  disputeNetPrize: number;
-  disputeFee: number;
+  disputeCandidateBet2: bigint;
+  disputeWinner: bigint;
+  disputeNetPrize: bigint;
+  disputeFee: bigint;
 }
 
 export interface PostDisputesDetails {

@@ -1,7 +1,7 @@
 import { ActionIcon, Avatar, Badge, Button, Center, Flex, Group, Image, Loader, Modal, NumberInput, Progress, Stack, Text } from "@mantine/core";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import ProviderDevice from "../../utils/ProviderDevice";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import GetDisputeById from "../../services/GetDisputeById";
 import { useEffect, useState } from "react";
 import { DisputesDetails } from "../../types/DisputesDetails";
@@ -35,20 +35,29 @@ export default function PageBetId() {
   const [betDetails, setBetDetails] = useState<BetsDetails | null>(null);
 
   useEffect(() => {
-    setIsLoading(true);
-    if (id && walletAddress) {
-      GetDisputeById(id).then((dispute) => {
-        setDispute(dispute);
-      }).finally(() => {
-        GetBetDetails(walletAddress, id).then((bet) => {
-          if (bet) {
-            setBetDetails(bet);
-          }
+    const fetchData = (isInitialLoad = false) => {
+      if (isInitialLoad) {
+        setIsLoading(true);
+      }
+      if (id && walletAddress) {
+        GetDisputeById(id).then((dispute) => {
+          setDispute(dispute);
         }).finally(() => {
-          setIsLoading(false);
+          GetBetDetails(walletAddress, id).then((bet) => {
+            if (bet) {
+              setBetDetails(bet);
+            }
+          }).finally(() => {
+            if (isInitialLoad) {
+              setIsLoading(false);
+            }
+          });
         });
-      });
-    }
+      }
+    };
+    fetchData(true);
+    const intervalId = setInterval(() => fetchData(false), 1000);
+    return () => clearInterval(intervalId);
   }, [id, walletAddress]);
 
   const onSubmit = async (data: PostBetsDetails) => {
@@ -86,8 +95,6 @@ export default function PageBetId() {
       setIsLoadingTx(false);
     }
   }
-
-  console.log(betDetails)
 
   const handleOpen = (candidate: 'candidate1' | 'candidate2') => {
     const candidateData = {
@@ -140,14 +147,14 @@ export default function PageBetId() {
               {Number(dispute?.disputeWinner) === 1 ? (
                 <Stack gap='xs' align='center' maw={isDesktop ? '15rem' : '8rem'}>
                   <Text fz='h1' fw={700} inline>winner</Text>
-                  <Avatar src={dispute?.disputeCandidateImage1} size={isDesktop ? '15rem' : '8rem'} radius='xl' />
                   <Text fz='sm' fw={700} inline>{dispute?.disputeCandidate1}</Text>
+                  <Avatar src={dispute?.disputeCandidateImage1} size={isDesktop ? '15rem' : '8rem'} radius='xl' />
                 </Stack>
               ) : Number(dispute?.disputeWinner) === 2 ? (
                 <Stack gap='xs' align='center' maw={isDesktop ? '15rem' : '8rem'}>
                   <Text fz='h1' fw={700} inline>winner</Text>
-                  <Avatar src={dispute?.disputeCandidateImage2} size={isDesktop ? '15rem' : '8rem'} radius='xl' />
                   <Text fz='sm' fw={700} inline>{dispute?.disputeCandidate2}</Text>
+                  <Avatar src={dispute?.disputeCandidateImage2} size={isDesktop ? '15rem' : '8rem'} radius='xl' />
                 </Stack>
               ) : (
                 <Flex gap={isDesktop ? '100px' : 'xl'} w='100%' justify='center'>
@@ -174,22 +181,19 @@ export default function PageBetId() {
                 </Flex>
               )}
               {Number(betDetails?.amount) > 0 ? (
-                <Stack>
+                <Stack gap='xs'>
                   <Stack gap={0} >
                     {Number(dispute?.disputeWinner) === 0 ? (
                       <>
-                        <Text inline>You have already bet on this dispute</Text>
+                        <Text fz='h2' inline>You have already bet on this dispute</Text>
                         <Text inline fz='sm' c='dimmed'>wait for the dispute to finish to claim your prize</Text>
                       </>
                     ) : betDetails?.collected ? (
-                      <Text inline>You have already claimed your prize</Text>
+                      <Text fz='h2' inline>You have already claimed your prize</Text>
                     ) : Number(betDetails?.candidateNumber) !== Number(dispute?.disputeWinner) ? (
-                      <Text inline>You lose</Text>
+                      <Text fz='h2' inline>You lose this dispute</Text>
                     ) : (
-                      <>
-                        <Text inline>You don't have bet on this dispute</Text>
-                        <Text inline fz='sm' c='dimmed'>You can bet now</Text>
-                      </>
+                      <Text fz='h2' inline>You win this dispute</Text>
                     )}
                   </Stack>
                   <Button
@@ -219,9 +223,6 @@ export default function PageBetId() {
         size='auto'
         opened={opened}
         onClose={() => {
-          if (isPosted) {
-            window.location.reload();
-          }
           close();
         }}
         withCloseButton={false}

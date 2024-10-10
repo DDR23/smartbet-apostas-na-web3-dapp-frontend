@@ -31,7 +31,7 @@ export default function Footer() {
           <Text fz='xs' px='8' c='dimmed' style={{ cursor: 'default' }}>FAQ</Text>
           <Text component="a" href="https://wa.me/5581981708405" target='_blank' fz='xs' px='8' c='indigo'>Contact Us</Text>
         </Group>
-        <Text fz='10px' ff='monospace'>© 2024–2024 Smart Bet. All rights reserved</Text>
+        <Text fz='10px' ff='monospace'>© 2024–2024 SmartBet. All rights reserved</Text>
       </Flex>
       {user && (
         <Group justify="center" gap='xs'>

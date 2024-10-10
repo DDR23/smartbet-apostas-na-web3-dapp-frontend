@@ -21,16 +21,20 @@ export default function CarouselBets() {
   const [detailedDisputes, setDetailedDisputes] = useState<DisputesDetails[]>([]);
   const [opened, { open, close }] = useDisclosure(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    const autoplayInstance = autoplay.current;
+    getDisputes(true);
+
+    const id = setInterval(() => {
+      getDisputes(false);
+    }, 1000);
+    setIntervalId(id);
     return () => {
-      autoplayInstance.stop();
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
     };
-  }, []);
-
-  useEffect(() => {
-    getDisputes();
   }, []);
 
   useEffect(() => {
@@ -39,8 +43,10 @@ export default function CarouselBets() {
     }
   }, [walletAddress]);
 
-  const getDisputes = async () => {
-    setIsLoading(true);
+  const getDisputes = async (showLoading: boolean) => {
+    if (showLoading) {
+      setIsLoading(true);
+    }
     try {
       const disputes = await GetAllDisputes();
       if (disputes) {
@@ -55,7 +61,9 @@ export default function CarouselBets() {
     } catch (error) {
       ProviderNotification({ title: 'Error', message: 'Failed to load disputes' });
     } finally {
-      setIsLoading(false);
+      if (showLoading) {
+        setIsLoading(false);
+      }
     }
   }
 

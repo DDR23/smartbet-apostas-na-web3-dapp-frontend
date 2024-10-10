@@ -17,4 +17,5 @@ Projeto hospedado em:
 ## Screenshots
 <!-- ![App Screenshot](/public/picture_01.png) -->
 
-<!-- TODO - adicionar icone de engrenagem no header para rota de gerenciamente pra o owner -->
+<!-- TODO - corrigir msgs de erro quando usuario recusa a conexão com a metamask -->
+<!-- TODO - ajustar tela de detalhes da disputa, colocar estatisticas ao lado da foto e retirar botao de retirada de premio apos o claim-->

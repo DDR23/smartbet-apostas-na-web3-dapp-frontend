@@ -8,7 +8,7 @@ export default function ModalSettings() {
       <Button justify="center" fullWidth px='lg' component="a" href="/admin/createbet">
         Create Bet
       </Button>
-      <Button disabled justify="center" fullWidth px='lg'>Dashboard - Coming soon</Button>
+      <Button justify="center" fullWidth px='lg' component="a" href="/admin">Dashboard</Button>
       <Group gap={4} c='green' mt='xs'>
         <AiOutlineSafety size={16} />
         <Text fz="xs" inline>Smartbet v.1.0.0</Text>

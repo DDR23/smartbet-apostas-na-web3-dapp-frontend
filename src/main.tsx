@@ -10,6 +10,7 @@ import PageBets from './pages/bets/PageBets.tsx';
 import PageBetId from './pages/betId/PageBetId.tsx';
 import { AuthProvider } from './contexts/AuthContext.tsx';
 import PageAdminCreateBet from './pages/admin/PageAdminCreateBet.tsx';
+import PageAdmin from './pages/admin/PageAdmin.tsx';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
           {
             path: '/bet/:id',
             element: <PageBetId />
+          },
+          {
+            path: '/admin',
+            element: <PageAdmin />
           },
           {
             path: '/admin/createbet',

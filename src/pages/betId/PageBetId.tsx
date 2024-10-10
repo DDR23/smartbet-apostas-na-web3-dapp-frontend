@@ -122,72 +122,11 @@ export default function PageBetId() {
             <AiOutlineArrowLeft />
           </ActionIcon>
         </Group>
-        <Flex direction={isDesktop ? 'row' : 'column'} w='90vw' flex={1} align='center' justify={isDesktop ? 'center' : 'flex-start'} p='0' pb='md' gap='xl'>
+        <Flex direction={isDesktop ? 'row-reverse' : 'column'} w='90vw' flex={1} align='center' justify={isDesktop ? 'center' : 'flex-start'} p='0' pb='md' gap='xl'>
           {isLoading ? (
             <Loader size='md' />
           ) : (
             <>
-              <Stack w={isDesktop ? '30rem' : '100%'} maw='100%' gap='0' align='center'>
-                <Flex direction='column' mb='xs' align='center'>
-                  <Badge mb='xs' variant="outline" color={Number(!dispute?.disputeWinner) ? 'green' : 'red.7'}>{Number(!dispute?.disputeWinner) ? 'running' : 'finished'}</Badge>
-                  <Text fw={700} fz={isDesktop ? 'h1' : 'h2'} mb='sm' inline>{dispute?.disputeName}</Text>
-                  <Text fz='lg' inline>🔥</Text>
-                  <Text fz='sm' c='dimmed'>Total accumulated</Text>
-                  <Text fw={700} fz='md' inline>{Number(dispute?.disputeNetPrize) >= 0 ? formatPOL(Number(dispute?.disputeNetPrize)) : 0}</Text> {/* TODO - ajustar para receber campo com valor nao subitraivel */}
-                </Flex>
-                <Progress.Root w='15rem' size='xl' mb='sm'>
-                  <Progress.Section value={candidate1Percentage} color="blue">
-                    <Progress.Label>{candidate1Percentage.toFixed(2)}%</Progress.Label>
-                  </Progress.Section>
-                  <Progress.Section value={candidate2Percentage} color="red">
-                    <Progress.Label>{candidate2Percentage.toFixed(2)}%</Progress.Label>
-                  </Progress.Section>
-                </Progress.Root>
-                {isOwner &&
-                  <Stack gap='0'>
-                    <Text fz='xs' c='dimmed'>Bets on {dispute?.disputeCandidate1}</Text>
-                    <Text inline fz='sm'>{formatPOL(Number(dispute?.disputeCandidateBet1))}</Text>
-                    <Text fz='xs' c='dimmed'>Bets on {dispute?.disputeCandidate2}</Text>
-                    <Text inline fz='sm'>{formatPOL(Number(dispute?.disputeCandidateBet2))}</Text>
-                    <Text fz='xs' c='green'>Fees collected</Text> {/* TODO - adicionar quantidade de fees coletadas */}
-                    <Text inline fz='sm' c='green'>{formatPOL(Number(dispute?.disputeFee))}</Text>
-                  </Stack>
-                }
-                {Number(betDetails?.amount) > 0 ? (
-                  <Stack gap='xs'>
-                    <Stack gap={0} >
-                      {Number(dispute?.disputeWinner) === 0 ? (
-                        <>
-                          <Text fz='h2' c='green' inline>Your bet has been confirmed</Text>
-                          <Text inline fz='sm' c='dimmed'>wait for the dispute to finish to claim your prize</Text>
-                        </>
-                      ) : betDetails?.collected ? (
-                        <Text fz='h2' inline mt='lg' c='green'>You already claimed your prize</Text>
-                      ) : Number(betDetails?.candidateNumber) !== Number(dispute?.disputeWinner) ? (
-                        <Text fz='h2' c='red.7' inline mt='lg'>You lose this dispute</Text>
-                      ) : (
-                        <Stack gap='xs'>
-                          <Text fz='h2' c='green' inline>You win this dispute</Text>
-                          <Button
-                            disabled={Number(dispute?.disputeWinner) === 0 || betDetails?.collected || Number(betDetails?.candidateNumber) !== Number(dispute?.disputeWinner)}
-                            color='green'
-                            leftSection={<Image src='/coin.png' alt="logo-smartbet" w={20} />}
-                            onClick={() => getPrize()}
-                            loading={isLoadingTx}
-                          >
-                            claim now
-                          </Button>
-                        </Stack>
-                      )}
-                    </Stack>
-                  </Stack>
-                ) : !isOwner && Number(betDetails?.amount) <= 0 && Number(dispute?.disputeWinner) !== 0 && (
-                  <>
-                    <Text fz='h2' c='red.7' inline mt='lg'>Bet closed</Text>
-                    <Text inline fz='sm' c='dimmed'>You don't have bet on this dispute</Text>
-                  </>
-                )}
-              </Stack>
               <Stack align='center'>
                 {Number(dispute?.disputeWinner) === 1 ? (
                   <Stack gap='xs' align='center' maw='15rem'>
@@ -214,10 +153,10 @@ export default function PageBetId() {
                     }
                   </Stack>
                 ) : (
-                  <Flex gap={isDesktop ? '80px' : 'md'} w='100%' justify='center'>
+                  <Flex gap={isDesktop ? '60px' : 'md'} w='100%' justify='center'>
                     <Stack justify="space-between" flex={1} gap='xs' align='center' maw={isDesktop ? '15rem' : '10rem'}>
+                      <Text fz='lg' fw={700} inline>{dispute?.disputeCandidate1}</Text>
                       <Avatar src={dispute?.disputeCandidateImage1} size={isDesktop ? '15rem' : '8rem'} radius='xl' />
-                      <Text fz='sm' fw={700} inline>{dispute?.disputeCandidate1}</Text>
                       {!isOwner && Number(betDetails?.amount) === 0 && (
                         <Button fullWidth bg='green' onClick={() => handleOpen('candidate1')}>Bet now</Button>
                       )}
@@ -226,8 +165,8 @@ export default function PageBetId() {
                       )}
                     </Stack>
                     <Stack justify="space-between" flex={1} gap='xs' align='center' maw={isDesktop ? '15rem' : '10rem'}>
+                      <Text fz='lg' fw={700} inline>{dispute?.disputeCandidate2}</Text>
                       <Avatar src={dispute?.disputeCandidateImage2} size={isDesktop ? '15rem' : '8rem'} radius='xl' />
-                      <Text fz='sm' fw={700} inline>{dispute?.disputeCandidate2}</Text>
                       {!isOwner && Number(betDetails?.amount) === 0 && (
                         <Button fullWidth bg='green' onClick={() => handleOpen('candidate2')}>Bet now</Button>
                       )}
@@ -236,6 +175,70 @@ export default function PageBetId() {
                       )}
                     </Stack>
                   </Flex>
+                )}
+              </Stack>
+              <Stack w={isDesktop ? '30rem' : '100%'} maw='100%' gap='0' align='center'>
+                <Flex direction='column' mb='xs' align='center'>
+                  <Badge mb='xs' variant="outline" color={Number(!dispute?.disputeWinner) ? 'green' : 'red.7'}>{Number(!dispute?.disputeWinner) ? 'running' : 'finished'}</Badge>
+                  <Text fw={700} fz={isDesktop ? 'h1' : 'h2'} mb='sm' inline>{dispute?.disputeName}</Text>
+                  <Text fz='lg' inline>🔥</Text>
+                  <Text fz='sm' c='dimmed'>Total accumulated</Text>
+                  <Text fw={700} fz='md' inline>{Number(dispute?.disputeNetPrize) >= 0 ? formatPOL(Number(dispute?.disputeNetPrize)) : 0}</Text> {/* TODO - ajustar para receber campo com valor nao subitraivel */}
+                </Flex>
+                <Progress.Root w='15rem' size='xl' mb='sm'>
+                  <Progress.Section value={candidate1Percentage} color="blue">
+                    <Progress.Label>{candidate1Percentage.toFixed(2)}%</Progress.Label>
+                  </Progress.Section>
+                  <Progress.Section value={candidate2Percentage} color="red">
+                    <Progress.Label>{candidate2Percentage.toFixed(2)}%</Progress.Label>
+                  </Progress.Section>
+                </Progress.Root>
+                {isOwner &&
+                  <Stack gap='0'>
+                    <Text inline fz='md' c='green'>{formatPOL(Number(dispute?.disputeFee))}</Text>
+                    <Text fz='xs' c='green'>Fees collected</Text> {/* TODO - adicionar quantidade de fees coletadas */}
+                    <Text fz='xs' c='dimmed'>Bets on {dispute?.disputeCandidate1}</Text>
+                    <Text inline fz='sm' c='dimmed'>{formatPOL(Number(dispute?.disputeCandidateBet1))}</Text>
+                    <Text fz='xs' c='dimmed'>Bets on {dispute?.disputeCandidate2}</Text>
+                    <Text inline fz='sm' c='dimmed'>{formatPOL(Number(dispute?.disputeCandidateBet2))}</Text>
+                  </Stack>
+                }
+                {Number(betDetails?.amount) > 0 ? (
+                  <Stack gap='xs'>
+                    <Stack gap={0} >
+                      {Number(dispute?.disputeWinner) === 0 ? (
+                        <>
+                          <Text fz='h2' c='green' inline>Your bet has been confirmed</Text>
+                          <Text inline fz='sm' c='dimmed'>wait for the dispute to finish to claim your prize</Text>
+                        </>
+                      ) : betDetails?.collected ? (
+                        <Stack gap='4' mt='xs' >
+                          <Text fz='h2' c='green' inline>🤑🤑</Text>
+                          <Text fz='h2' inline c='green'>You already claimed your prize</Text>
+                        </Stack>
+                      ) : Number(betDetails?.candidateNumber) !== Number(dispute?.disputeWinner) ? (
+                        <Text fz='h2' c='red.7' mt='lg'>😭 You lose 😭</Text>
+                      ) : (
+                        <Stack gap='xs'>
+                          <Text fz='h2' c='green'>🤑 You win 🤑</Text>
+                          <Button
+                            disabled={Number(dispute?.disputeWinner) === 0 || betDetails?.collected || Number(betDetails?.candidateNumber) !== Number(dispute?.disputeWinner)}
+                            color='green'
+                            leftSection={<Image src='/coin.png' alt="logo-smartbet" w={20} />}
+                            onClick={() => getPrize()}
+                            loading={isLoadingTx}
+                          >
+                            claim now
+                          </Button>
+                        </Stack>
+                      )}
+                    </Stack>
+                  </Stack>
+                ) : !isOwner && Number(betDetails?.amount) <= 0 && Number(dispute?.disputeWinner) !== 0 && (
+                  <>
+                    <Text fz='h2' c='red.7' inline mt='lg'>Bet closed</Text>
+                    <Text inline fz='sm' c='dimmed'>You don't have bet on this dispute</Text>
+                  </>
                 )}
               </Stack>
             </>
@@ -257,7 +260,7 @@ export default function PageBetId() {
           <Flex direction='column' align='center' gap='md'>
             {isPosted ? (
               <>
-                <Text ta='center' ff='heading' fw={700} fz='h1' c='indigo'>Bet created successfully</Text>
+                <Text ta='center' fw={700} fz='h1' c='indigo'>Bet created successfully</Text>
                 <Center m='lg'>
                   <FaRegCircleCheck size={130} color='green' />
                 </Center>
@@ -272,7 +275,7 @@ export default function PageBetId() {
               <>
                 <Avatar src={selectedCandidate.image} size={isDesktop ? '15rem' : '8rem'} radius='xl' />
                 <form>
-                  <Stack gap='md'>
+                  <Stack gap='md' w='280'>
                     <NumberInput
                       w='100%'
                       value={amount}
@@ -288,7 +291,7 @@ export default function PageBetId() {
                       _amount: Number(amount)
                     })}>
                       <Flex direction='column' align='center' gap='0'>
-                        <Text>{formatPOL(amount)}</Text>
+                        <Text truncate w='255'>{formatPOL(amount)}</Text>
                         Bet now on {selectedCandidate.name}
                       </Flex>
                     </Button>

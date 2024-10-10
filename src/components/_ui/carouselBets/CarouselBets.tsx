@@ -102,7 +102,13 @@ export default function CarouselBets() {
                 <Text fw={700} fz='h3' inline>{row.disputeCandidate2}</Text>
               </Flex>
               {walletAddress ? (
-                <Button component="a" href={`/bet/${index + 1}`} color={isOwner ? '' : 'green'} fullWidth>{isOwner ? 'Details' : Number(row.disputeWinner) === 0 ? 'Bet now' : 'More details'}</Button>
+                <>
+                  {isOwner ? (
+                    <Button component="a" href={`/bet/${index + 1}`} color={Number(row.disputeWinner) === 0 ? 'green' : 'red'} fullWidth>Bet details</Button>
+                  ) : (
+                    <Button component="a" href={`/bet/${index + 1}`} color={Number(row.disputeWinner) === 0 ? 'green' : 'red'} fullWidth>{Number(row.disputeWinner) === 0 ? 'Bet now' : 'More details'}</Button>
+                  )}
+                </>
               ) : (
                 <Button px={isDesktop ? 'xs' : '8'} onClick={open}>
                   <HiOutlineWallet size={22} />
@@ -142,7 +148,7 @@ export default function CarouselBets() {
           <Text fz='h1'>Install Metamask first</Text>
         </Center>
       ) : (
-        <Center bg='dimmed' w='100vw' h='57vh'>
+        <Center bg='dimmed' w='100vw' h='57vh' ta='center' p='lg'>
           <Text fz='h1'>No disputes available at the moment</Text>
         </Center>
       )}

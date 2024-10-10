@@ -2,6 +2,7 @@ import { Flex, Text, Avatar, Stack, Group, Image } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { HiMiniComputerDesktop, HiMiniDevicePhoneMobile, HiMiniDeviceTablet } from "react-icons/hi2";
+import { SiPolygon } from "react-icons/si";
 
 interface User {
   login: string;
@@ -23,6 +24,10 @@ export default function Footer() {
 
   return (
     <Flex direction='column' align="center" justify="center" gap="xs" m='lg' mt='xs'>
+      <Flex gap='xs' justify='center' align='center' c='dimmed'>
+        <SiPolygon size={16} />
+        <Text fz='xs' inline>Polygon Amoy Testnet</Text>
+      </Flex>
       <Flex direction='column' align='center' mx='auto' maw='92vw' ta='center'>
         <Text ff='monospace' fz='12px' ta='center' c='dimmed' inline>Available on: <HiMiniComputerDesktop size={16} /> <HiMiniDeviceTablet size={16} /> <HiMiniDevicePhoneMobile size={16} /></Text>
         <Group my='xs' justify="center" gap={1}>

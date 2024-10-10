@@ -10,6 +10,7 @@ export interface DisputesDetails {
   disputeWinner: bigint;
   disputeNetPrize: bigint;
   disputeFee: bigint;
+  disputeStatus: bigint;
 }
 
 export interface PostDisputesDetails {

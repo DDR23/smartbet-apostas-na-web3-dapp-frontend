@@ -14,6 +14,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { GetBetDetails } from "../../services/GetBetDetails";
 import { formatPOL } from "../../utils/FormatPol";
 import FinishDispute from "../../services/FinishDipute";
+import { ClaimPrize } from "../../services/ClaimPrize";
 
 export default function PageBetId() {
   const { isDesktop } = ProviderDevice();
@@ -72,9 +73,21 @@ export default function PageBetId() {
       return;
     } finally {
       setIsLoadingTx(false);
-      window.location.reload()
     }
   };
+
+  const getPrize = async () => {
+    try {
+      setIsLoadingTx(true);
+      await ClaimPrize(Number(id));
+    } catch (error) {
+      return;
+    } finally {
+      setIsLoadingTx(false);
+    }
+  }
+
+  console.log(betDetails)
 
   const handleOpen = (candidate: 'candidate1' | 'candidate2') => {
     const candidateData = {
@@ -168,14 +181,26 @@ export default function PageBetId() {
                         <Text inline>You have already bet on this dispute</Text>
                         <Text inline fz='sm' c='dimmed'>wait for the dispute to finish to claim your prize</Text>
                       </>
+                    ) : betDetails?.collected ? (
+                      <Text inline>You have already claimed your prize</Text>
+                    ) : Number(betDetails?.candidateNumber) !== Number(dispute?.disputeWinner) ? (
+                      <Text inline>You lose</Text>
                     ) : (
                       <>
-                        <Text inline>Prize is already available for withdrawal</Text>
-                        <Text inline fz='sm' c='dimmed'>You can withdraw your prize</Text>
+                        <Text inline>You don't have bet on this dispute</Text>
+                        <Text inline fz='sm' c='dimmed'>You can bet now</Text>
                       </>
                     )}
                   </Stack>
-                  <Button disabled={Number(dispute?.disputeWinner) === 0} color='green' leftSection={<Image src='/coin.png' alt="logo-smartbet" w={20} />}>claim now</Button>
+                  <Button
+                    disabled={Number(dispute?.disputeWinner) === 0 || betDetails?.collected || Number(betDetails?.candidateNumber) !== Number(dispute?.disputeWinner)}
+                    color='green'
+                    leftSection={<Image src='/coin.png' alt="logo-smartbet" w={20} />}
+                    onClick={() => getPrize()}
+                    loading={isLoadingTx}
+                  >
+                    claim now
+                  </Button>
                 </Stack>
               ) : !isOwner && Number(betDetails?.amount) <= 0 && Number(dispute?.disputeWinner) !== 0 && (
                 <Stack>
@@ -208,7 +233,7 @@ export default function PageBetId() {
           <Flex direction='column' align='center' gap='md'>
             {isPosted ? (
               <>
-                <Text ff='heading' fw={700} fz='h1' c='indigo'>Bet created successfully</Text>
+                <Text ta='center' ff='heading' fw={700} fz='h1' c='indigo'>Bet created successfully</Text>
                 <Center m='lg'>
                   <FaRegCircleCheck size={130} color='green' />
                 </Center>

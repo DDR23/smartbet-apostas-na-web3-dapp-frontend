@@ -42,6 +42,11 @@ interface Contract {
     ) => {
       send: (args: any) => Promise<any>;
     };
+    claimPrize: (
+      disputeId: number
+    ) => {
+      send: (args: any) => Promise<any>;
+    };
   };
 }
 

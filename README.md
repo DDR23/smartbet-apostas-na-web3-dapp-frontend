@@ -18,4 +18,3 @@ Projeto hospedado em:
 <!-- ![App Screenshot](/public/picture_01.png) -->
 
 <!-- TODO - corrigir msgs de erro quando usuario recusa a conexão com a metamask -->
-<!-- TODO - ajustar tela de detalhes da disputa, colocar estatisticas ao lado da foto e retirar botao de retirada de premio apos o claim-->

@@ -17,4 +17,7 @@ Projeto hospedado em:
 ## Screenshots
 <!-- ![App Screenshot](/public/picture_01.png) -->
 
-<!-- TODO - corrigir msgs de erro quando usuario recusa a conexão com a metamask -->
+<!-- TODO - mudar ABI e address contract -->
+<!-- TODO - adicionar pagina de detalhes das disputas exclusiva do owner -->
+<!-- TODO - adicionar modal de mudar status da disputa -->
+<!-- TODO - ajustar caroussel pra mostrar apenas disputas que estao ativas -->

@@ -38,9 +38,16 @@ export const ClaimPrize = async (disputeId: number) => {
     });
     return tx;
   } catch (error) {
-    ProviderNotification({
-      title: "Error",
-      message: "Error claiming prize",
-    });
+    if ((error as any).code === 100) {
+      ProviderNotification({
+        title: "Rejected",
+        message: "Connection was refused by the user",
+      });
+    } else {
+      ProviderNotification({
+        title: "Error",
+        message: "Error claiming prize",
+      });
+    }
   }
 };

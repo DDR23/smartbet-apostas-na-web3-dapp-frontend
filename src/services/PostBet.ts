@@ -45,9 +45,16 @@ export async function postBet(data: PostBetsDetails) {
     });
     return tx;
   } catch (error) {
-    ProviderNotification({
-      title: "Error",
-      message: "Error creating bet",
-    });
+    if ((error as any).code === 100) {
+      ProviderNotification({
+        title: "Rejected",
+        message: "Connection was refused by the user",
+      });
+    } else {
+      ProviderNotification({
+        title: "Error",
+        message: "Error creating bet",
+      });
+    }
   }
 }

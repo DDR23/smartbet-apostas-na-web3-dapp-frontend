@@ -37,9 +37,16 @@ export default async function FinishDispute(disputeId: number, winner: number) {
     });
     return tx;
   } catch (error) {
-    ProviderNotification({
-      title: "Error",
-      message: "Error finishing dispute",
-    });
+    if ((error as any).code === 100) {
+      ProviderNotification({
+        title: "Rejected",
+        message: "Connection was refused by the user",
+      });
+    } else {
+      ProviderNotification({
+        title: "Error",
+        message: "Error finishing dispute",
+      });
+    }
   }
 }

@@ -37,7 +37,7 @@ export async function postDispute(data: PostDisputesDetails) {
       data._disputeCandidateImage1,
       data._disputeCandidate2,
       data._disputeCandidateImage2
-    ).send({ 
+    ).send({
       from: sender,
       gasPrice: adjustedGasPrice
     });
@@ -48,9 +48,16 @@ export async function postDispute(data: PostDisputesDetails) {
     });
     return tx;
   } catch (error) {
-    ProviderNotification({
-      title: "Error",
-      message: "Error creating dispute",
-    });
+    if ((error as any).code === 100) {
+      ProviderNotification({
+        title: "Rejected",
+        message: "Connection was refused by the user",
+      });
+    } else {
+      ProviderNotification({
+        title: "Error",
+        message: "Error creating dispute",
+      });
+    }
   }
 }

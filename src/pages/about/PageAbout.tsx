@@ -36,7 +36,7 @@ export default function PageAbout() {
         <List ta='left' type="ordered" pr='xs'>
           <Text fz='h2' fw={700} c='indigo' inline>Contracts Used</Text>
           <Text fz='h4'>Our platform uses one main smart contract:</Text>
-          <List.Item pl='xs'><Text component="a" href="#" target="_blank" fz='sm'>Smartbet Disputes<RiShareBoxFill size={16} /></Text></List.Item>
+          <List.Item pl='xs'><Text component="a" href="https://amoy.polygonscan.com/address/0x4a54ec234FBaCA5de26f6847894C05cdB5F7F5F8#code" target="_blank" fz='sm'>Smartbet Disputes<RiShareBoxFill size={16} /></Text></List.Item>
         </List>
 
         <Stack gap='xs'>

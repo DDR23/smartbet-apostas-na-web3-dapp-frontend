@@ -4,6 +4,15 @@
 
 **Smart Bet** é uma plataforma de apostas que permite aos usuários participar de disputas de forma segura e transparente, utilizando tecnologia blockchain, garantindo que todas as transações sejam registradas de maneira imutável e auditável. O projeto foi desenvolvido para fins educacionais.
 
+## Sobre o contrato
+
+- **Rede**: Polygon Amoy Testnet
+- **Endereço do Contrato**: 0x4a54ec234FBaCA5de26f6847894C05cdB5F7F5F8
+- **Hash da Transação**: 0x14c0a3df7745adcf95b9b3d924ec64923183ae0fe2277645a310b107952a1c83
+- **Bloco**: 13014671
+- **Codigo fonte do contrato em**: [Polygon PoS Chain Amoy Testnet Explorer](https://amoy.polygonscan.com/address/0x4a54ec234FBaCA5de26f6847894C05cdB5F7F5F8#code)
+- **Repositório do contrato**: [atividade---SMARTCONTRACT---meu-primeiro-smartcontract---LUIZTOOLS](https://github.com/DDR23/atividade---SMARTCONTRACT---meu-primeiro-smartcontract---LUIZTOOLS)
+
 Projeto hospedado em: 
 
 ## Tecnologias Utilizadas

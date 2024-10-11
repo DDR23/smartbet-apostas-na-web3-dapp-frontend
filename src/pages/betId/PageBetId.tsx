@@ -248,9 +248,7 @@ export default function PageBetId() {
       <Modal
         size='auto'
         opened={opened}
-        onClose={() => {
-          close();
-        }}
+        onClose={close}
         withCloseButton={false}
         overlayProps={{
           backgroundOpacity: 0.55,

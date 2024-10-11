@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import { HiOutlineCog6Tooth } from "react-icons/hi2";
 import { useDisclosure } from "@mantine/hooks";
 import { TbListDetails } from "react-icons/tb";
+import { ToggleDisputeStatus } from "../../services/ToggleDisputeStatus";
+import { MdLockOpen, MdLockOutline } from "react-icons/md";
 
 export default function PageAdmin() {
   const { isOwner, isInitializing } = useAuth();
@@ -23,13 +25,16 @@ export default function PageAdmin() {
   const [totalNetPrizes, setTotalNetPrizes] = useState(0);
   const [totalFees, setTotalFees] = useState(0);
   const [opened, { open, close }] = useDisclosure(false);
+  const [isLoadingTx, setIsLoadingTx] = useState(false);
+  const [selectedDispute, setSelectedDispute] = useState<DisputesDetails | null>(null);
+  const [selectedDisputeIndex, setSelectedDisputeIndex] = useState<any>();
 
   useEffect(() => {
     if (!isInitializing && !isOwner) {
       navigate('/');
     }
   }, [isInitializing, isOwner, navigate]);
-  
+
   useEffect(() => {
     getDisputes(true);
     const id = setInterval(() => {
@@ -70,6 +75,24 @@ export default function PageAdmin() {
     }
   }
 
+  const toggleStatus = async (disputeId: number, status: boolean) => {
+    try {
+      setIsLoadingTx(true);
+      await ToggleDisputeStatus(disputeId ,status);
+    } catch (error) {
+      return;
+    } finally {
+      setIsLoadingTx(false);
+      close();
+    }
+  }
+
+  const handleOpen = (index: number) => {
+    setSelectedDispute(detailedDisputes[index]);
+    setSelectedDisputeIndex(index + 1);
+    open();
+  }
+
   const betList = detailedDisputes.map((row, index) => (
     <Table.Tr key={index}>
       <Table.Td>{row.disputeName}</Table.Td>
@@ -88,7 +111,7 @@ export default function PageAdmin() {
             </Menu.Target>
             <Menu.Dropdown>
               <Menu.Item component='a' href={`/admin/bet/${index + 1}`} leftSection={<TbListDetails size={20} />}>Details</Menu.Item>
-              <Menu.Item onClick={open} leftSection={<HiOutlineCog6Tooth size={20} />}>Toggle Status</Menu.Item>
+              <Menu.Item onClick={() => handleOpen(index)} leftSection={<HiOutlineCog6Tooth size={20} />}>Toggle Status</Menu.Item>
             </Menu.Dropdown>
           </Menu>
         </Group>
@@ -158,7 +181,26 @@ export default function PageAdmin() {
           blur: 3
         }}
       >
-        <>Modal de alterar o status da disputa</>
+        {selectedDispute && (
+          <>
+            <Stack align="center" gap={0}>
+              <Text ta='center'>Change {selectedDispute.disputeName} status</Text>
+              <Text ta='center' size="sm" c='dimmed'>{selectedDispute.disputeStatus ? 'These disputes are currently active' : 'These disputes are currently disabled'}</Text>
+            </Stack>
+            <Button
+              onClick={() => toggleStatus( selectedDisputeIndex, !selectedDispute.disputeStatus)}
+              type='submit'
+              fullWidth
+              mt="md"
+              loading={isLoadingTx}
+              leftSection={!selectedDispute.disputeStatus ? <MdLockOpen size={20} /> : <MdLockOutline size={20} />}
+              color={!selectedDispute.disputeStatus ? 'green' : 'red'}
+            >
+              {selectedDispute.disputeStatus ? 'Disable Dispute' : 'Enable Dispute'}
+            </Button>
+            <Text ta='center' size="xs" c='dimmed' mt='xs'>Disputes with the status disabled will not be shown on the main page to users</Text>
+          </>
+        )}
       </Modal>
     </>
   );

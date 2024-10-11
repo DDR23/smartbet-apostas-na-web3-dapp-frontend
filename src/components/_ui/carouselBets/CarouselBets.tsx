@@ -67,6 +67,8 @@ export default function CarouselBets() {
     }
   }
 
+  //  TODO - adicionar filtro de status
+
   const modalConnect = () => {
     return (
       <Modal

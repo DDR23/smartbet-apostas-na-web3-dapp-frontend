@@ -47,6 +47,12 @@ interface Contract {
     ) => {
       send: (args: any) => Promise<any>;
     };
+    toggleDisputeStatus: (
+      disputeId: number,
+      status: boolean
+    ) => {
+      send: (args: any) => Promise<any>
+    };
   };
 }
 

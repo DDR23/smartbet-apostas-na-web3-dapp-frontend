@@ -110,7 +110,7 @@ export default function PageAdmin() {
               </ActionIcon>
             </Menu.Target>
             <Menu.Dropdown>
-              <Menu.Item component='a' href={`/admin/bet/${index + 1}`} leftSection={<TbListDetails size={20} />}>Details</Menu.Item>
+              <Menu.Item disabled component='a' href={`/admin/bet/${index + 1}`} leftSection={<TbListDetails size={20} />}>Details</Menu.Item>
               <Menu.Item onClick={() => handleOpen(index)} leftSection={<HiOutlineCog6Tooth size={20} />}>Toggle Status</Menu.Item>
             </Menu.Dropdown>
           </Menu>

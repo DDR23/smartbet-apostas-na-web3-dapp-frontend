@@ -55,7 +55,7 @@ export default function CarouselBets() {
         );
         const resolvedDetailedDisputes = await Promise.all(detailedDisputesPromises);
         setDetailedDisputes(
-          resolvedDetailedDisputes.filter((dispute): dispute is DisputesDetails => dispute !== null)
+          resolvedDetailedDisputes.filter((dispute): dispute is DisputesDetails => dispute !== null && typeof dispute.disputeStatus === 'boolean' && dispute.disputeStatus)
         );
       }
     } catch (error) {

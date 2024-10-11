@@ -35,9 +35,8 @@ export default function PageAbout() {
 
         <List ta='left' type="ordered" pr='xs'>
           <Text fz='h2' fw={700} c='indigo' inline>Contracts Used</Text>
-          <Text fz='h4'>Our platform uses two main smart contracts:</Text>
-          <List.Item pl='xs'><Text component="a" href="#" target="_blank" fz='sm'>American Election Contract <RiShareBoxFill size={16} /></Text></List.Item>
-          <List.Item pl='xs'><Text component="a" href="#" target="_blank" fz='sm'>São Paulo Election Contract <RiShareBoxFill size={16} /></Text></List.Item>
+          <Text fz='h4'>Our platform uses one main smart contract:</Text>
+          <List.Item pl='xs'><Text component="a" href="#" target="_blank" fz='sm'>Smartbet Disputes<RiShareBoxFill size={16} /></Text></List.Item>
         </List>
 
         <Stack gap='xs'>
@@ -45,8 +44,8 @@ export default function PageAbout() {
             <SiPolygon size={20} />
             <Text fz='sm'>Polygon Amoy Testnet</Text>
           </Flex>
-          <Text fz='sm' inline>Both contracts are implemented on the Polygon test network (Amoy Testnet), ensuring low transaction fees and high processing speed.</Text>
-          <Text fz='sm' inline>All our contracts are open-source and can be audited to ensure transparency and security.</Text>
+          <Text fz='sm' inline>This contract is implemented on the Polygon test network (Amoy Testnet), ensuring low transaction fees and high processing speed.</Text>
+          <Text fz='sm' inline>This contract is open-source and can be audited to ensure transparency and security.</Text>
         </Stack>
 
         <Flex direction='column' justify='center' align='center' gap='0' mt='xs'>

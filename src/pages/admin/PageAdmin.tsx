@@ -11,9 +11,10 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineCog6Tooth } from "react-icons/hi2";
 import { useDisclosure } from "@mantine/hooks";
+import { TbListDetails } from "react-icons/tb";
 
 export default function PageAdmin() {
-  const { isOwner } = useAuth();
+  const { isOwner, isInitializing } = useAuth();
   const navigate = useNavigate();
   const [detailedDisputes, setDetailedDisputes] = useState<DisputesDetails[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,11 +25,11 @@ export default function PageAdmin() {
   const [opened, { open, close }] = useDisclosure(false);
 
   useEffect(() => {
-    if (!isOwner && detailedDisputes && !isLoading ) {
+    if (!isInitializing && !isOwner) {
       navigate('/');
     }
-  }, [isOwner, detailedDisputes, isLoading]);
-
+  }, [isInitializing, isOwner, navigate]);
+  
   useEffect(() => {
     getDisputes(true);
     const id = setInterval(() => {
@@ -86,7 +87,7 @@ export default function PageAdmin() {
               </ActionIcon>
             </Menu.Target>
             <Menu.Dropdown>
-              <Menu.Item component='a' href={`/admin/bet/${index + 1}`}>Details</Menu.Item>
+              <Menu.Item component='a' href={`/admin/bet/${index + 1}`} leftSection={<TbListDetails size={20} />}>Details</Menu.Item>
               <Menu.Item onClick={open} leftSection={<HiOutlineCog6Tooth size={20} />}>Toggle Status</Menu.Item>
             </Menu.Dropdown>
           </Menu>
@@ -112,7 +113,7 @@ export default function PageAdmin() {
           <>
             <Stack w='90vw' align="center" mx='auto' gap='lg'>
               <Paper withBorder radius='md' w='100%' p='lg'>
-                <Text ff='heading' ta='center' c='indigo' p='md' pt={0}>Summary Overview</Text>
+                <Text ta='center' fw={700} fz='h2' inline c='indigo' p='md' pt={0}>Overview</Text>
                 <SimpleGrid cols={{ base: 1, md: 3 }}>
                   <Stack gap='0' ta="center">
                     <Text inline>{totalBets}</Text>

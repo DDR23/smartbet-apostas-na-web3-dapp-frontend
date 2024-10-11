@@ -112,7 +112,7 @@ export default function CarouselBets() {
               ) : (
                 <Button px={isDesktop ? 'xs' : '8'} onClick={open}>
                   <HiOutlineWallet size={22} />
-                  <Text visibleFrom="xs" pl='8'>Connect wallet</Text>
+                  <Text pl='8'>Connect wallet</Text>
                 </Button>
               )}
             </Stack>

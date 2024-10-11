@@ -196,7 +196,7 @@ export default function PageBetId() {
                 {isOwner &&
                   <Stack gap='0'>
                     <Text inline fz='md' c='green'>{formatPOL(Number(dispute?.disputeFee))}</Text>
-                    <Text fz='xs' c='green'>Fees collected</Text> {/* TODO - adicionar quantidade de fees coletadas */}
+                    <Text fz='xs' c='green'>Fees collected</Text>
                     <Text fz='xs' c='dimmed'>Bets on {dispute?.disputeCandidate1}</Text>
                     <Text inline fz='sm' c='dimmed'>{formatPOL(Number(dispute?.disputeCandidateBet1))}</Text>
                     <Text fz='xs' c='dimmed'>Bets on {dispute?.disputeCandidate2}</Text>

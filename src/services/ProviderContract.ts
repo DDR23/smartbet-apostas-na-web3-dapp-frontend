@@ -60,7 +60,7 @@ export default function ProviderContract(): Contract | null {
   const web3 = ProviderWallet();
   if (!web3) return null;
 
-  const contractAddress = "0x4a54ec234FBaCA5de26f6847894C05cdB5F7F5F8";
+  const contractAddress = "0x89674AA4a4d729605a4C6B1484d61401cC45341C";
   const contract = new web3.eth.Contract(SmartbetDisputes, contractAddress);
   return contract as unknown as Contract;
 }

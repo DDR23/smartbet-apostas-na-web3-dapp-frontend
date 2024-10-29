@@ -4,6 +4,7 @@
 
 **Smart Bet** é uma plataforma de apostas que permite aos usuários participar de disputas de forma segura e transparente, utilizando tecnologia blockchain, garantindo que todas as transações sejam registradas de maneira imutável e auditável. O projeto foi desenvolvido para fins educacionais.
 
+<!-- TODO - resolver erro: (404: NOT_FOUND) -->
 <!-- Projeto hospedado em: https://smartbetdisputes.vercel.app/ -->
 Obs: projeto nao finalizado!
 TODO - verificar motivo do 404 na rota /bets

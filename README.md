@@ -1,4 +1,4 @@
-# atividade---DAPP---meu-primeiro-smartcontract---LUIZTOOLS
+# smartbet-dapp-de-apostas-na-web3-frontend
 
 ## Sobre o projeto
 

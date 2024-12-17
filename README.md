@@ -1,4 +1,4 @@
-# smartbet-dapp-de-apostas-na-web3-frontend
+# smartbet-apostas-na-web3-dapp-frontend
 
 ## Sobre o projeto
 

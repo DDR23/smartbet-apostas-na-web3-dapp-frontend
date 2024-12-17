@@ -1,4 +1,6 @@
 # smartbet-apostas-na-web3-dapp-frontend
+Obs: projeto nao finalizado!
+TODO - verificar motivo do 404 na rota /bets
 
 ## Sobre o projeto
 
@@ -6,8 +8,6 @@
 
 <!-- TODO - resolver erro: (404: NOT_FOUND) -->
 <!-- Projeto hospedado em: https://smartbetdisputes.vercel.app/ -->
-Obs: projeto nao finalizado!
-TODO - verificar motivo do 404 na rota /bets
 
 ## Sobre o contrato
 

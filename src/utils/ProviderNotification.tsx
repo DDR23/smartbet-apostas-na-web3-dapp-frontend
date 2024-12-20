@@ -1,6 +1,6 @@
 import { notifications } from "@mantine/notifications";
 import { FaRegCircleCheck } from "react-icons/fa6"
-import { LuAlertCircle } from "react-icons/lu";
+import { FiAlertCircle } from "react-icons/fi";
 import { TbXboxX } from "react-icons/tb";
 
 interface NotificationOptions {
@@ -11,7 +11,7 @@ interface NotificationOptions {
 
 export default function ProviderNotification({ title, message }: NotificationOptions) {
   const notificationColor = title === 'Success' ? 'green' : title === 'Error' ? 'red' : 'orange';
-  const notificationIcon = title === 'Success' ? <FaRegCircleCheck /> : title === 'Error' ? <TbXboxX /> : <LuAlertCircle />;
+  const notificationIcon = title === 'Success' ? <FaRegCircleCheck /> : title === 'Error' ? <TbXboxX /> : <FiAlertCircle />;
 
   notifications.show({
     title: title,

@@ -1,6 +1,6 @@
 import { Flex, Text, Avatar, Stack, Group, Image } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
-import { useEffect, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 import { HiMiniComputerDesktop, HiMiniDevicePhoneMobile, HiMiniDeviceTablet } from "react-icons/hi2";
 import { SiPolygon } from "react-icons/si";
 
@@ -46,7 +46,7 @@ export default function Footer() {
               <Text ff='monospace' fz='12px' c='dimmed'>powered by {user.login}</Text>
               <Image src='/br.png' w={16} alt="brazil-flag" />
             </Group>
-            <Group ref={ref}>
+            <Group ref={ref as RefObject<HTMLDivElement>}>
               <Text fz='10px' c={hovered ? 'indigo' : 'dimmed'} component="a" href="https://polygonscan.com/address/0x1F8D637B3d3fa444882A89d20445E202eD5AA319" target="_blank" ff='monospace'>Donations: 0x1F8D...A319 ❤️</Text>
             </Group>
           </Stack>

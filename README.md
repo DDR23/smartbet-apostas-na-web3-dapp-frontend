@@ -1,5 +1,5 @@
 # smartbet-apostas-na-web3-dapp-frontend
-Obs: projeto nao finalizado!
+Obs: projeto foi finalizado, porem agora ele apresenta erro 404 nas rotas que interagem com o contrato
 TODO - verificar motivo do 404 na rota /bets
 
 ## Sobre o projeto
